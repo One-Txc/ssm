@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- id="realm"不可更改 继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的CustRealm.java -->
+	<bean id="realm"
+		class="txc.xxy.ssm.shiro.ext.authc.UserRealm">
+		<property name="credentialsMatcher" ref="credentialsMatcher"></property>
+		<!-- 不使用shiro内置缓存，自行使用缓存方案 -->
+		<property name="cachingEnabled" value="false"></property>
+	</bean>
+
+	<!-- 凭据校验规则 -->
+	<bean id="credentialsMatcher"
+		class="txc.xxy.ssm.shiro.ext.authc.UserCredentialsMatcher">
+	</bean>
+
+	<!-- 此 服务类由各自系统自行继承AbstractFilterChainDefinitionsService 进行扩展 -->
+	<bean id="filterChainDefinitionsService"
+		class="txc.xxy.ssm.shiro.ext.authc.UserFilterChainDefinitionsService">
+		<property name="jedisClient" ref="jedisClient" />
+		<property name="custRolesAuthorizationFilter" ref="custRolesAuthorizationFilter"/>
+		<!-- 拦截的URL及校验规则 -->
+		<property name="definitions">
+			<value>
+				<!-- 系统会优先使用先匹配到的权限 -->
+				/r/html/student.htm = roles[student]
+				/js/** = anon
+				/r/html/** = roles[login]
+				<!-- /r/bug/**=roles[login]
+				/basedict/**=roles[login,admin]
+				/demand/** =roles[login] -->				
+			</value>
+		</property>
+	</bean>
+
+</beans> 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>velocity变量/对象的使用</title>
+</head>
+<body>
+<h1>springmvc中定义的bean：viewResolver中的变量</h1>
+<h2>$request</h2>
+<h2>$session</h2>
+<h2>$rc</h2>
+<h2>$dateTool.class</h2>
+<h2>$domain</h2>
+<h2>$jsVersion</h2>
+<h2>$jsMin</h2>
+<h2>$number</h2>
+</body>
+</html>

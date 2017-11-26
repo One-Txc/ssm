@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="txc.xxy.ssm.mapper.UpdateRecordMapper">
+	<resultMap id="BaseResultMap" type="txc.xxy.ssm.model.UpdateRecord">
+		<id column="sid" jdbcType="VARCHAR" property="sid" />
+		<result column="subject_id" jdbcType="VARCHAR" property="subjectId" />
+		<result column="subject_type" jdbcType="VARCHAR" property="subjectType" />
+		<result column="node_status_code" jdbcType="VARCHAR" property="nodeStatusCode" />
+		<result column="node_suspend_state" jdbcType="VARCHAR" property="nodeSuspendState" />
+		<result column="remark" jdbcType="VARCHAR" property="remark" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="user_name" jdbcType="VARCHAR" property="userName" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		sid, subject_id, subject_type, node_status_code, node_suspend_state, remark, create_time, 
+		user_id, user_name
+	</sql>
+	<select id="selectByExample" parameterType="txc.xxy.ssm.model.UpdateRecordExample" resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'false' as QUERYID,
+		<include refid="Base_Column_List" />
+		from update_record
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from update_record
+		where sid = #{sid,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from update_record
+		where sid = #{sid,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="txc.xxy.ssm.model.UpdateRecordExample">
+		delete from update_record
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="txc.xxy.ssm.model.UpdateRecord">
+		insert into update_record (sid, subject_id, subject_type, 
+			node_status_code, node_suspend_state, remark, 
+			create_time, user_id, user_name
+			)
+		values (#{sid,jdbcType=VARCHAR}, #{subjectId,jdbcType=VARCHAR}, #{subjectType,jdbcType=VARCHAR}, 
+			#{nodeStatusCode,jdbcType=VARCHAR}, #{nodeSuspendState,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+			#{createTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}
+			)
+	</insert>
+	<insert id="insertSelective" parameterType="txc.xxy.ssm.model.UpdateRecord">
+		insert into update_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="subjectId != null">
+				subject_id,
+			</if>
+			<if test="subjectType != null">
+				subject_type,
+			</if>
+			<if test="nodeStatusCode != null">
+				node_status_code,
+			</if>
+			<if test="nodeSuspendState != null">
+				node_suspend_state,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				#{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectId != null">
+				#{subjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectType != null">
+				#{subjectType,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeStatusCode != null">
+				#{nodeStatusCode,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeSuspendState != null">
+				#{nodeSuspendState,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByExampleSelective" parameterType="map">
+		update update_record
+		<set>
+			<if test="record.sid != null">
+				sid = #{record.sid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.subjectId != null">
+				subject_id = #{record.subjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.subjectType != null">
+				subject_type = #{record.subjectType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.nodeStatusCode != null">
+				node_status_code = #{record.nodeStatusCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.nodeSuspendState != null">
+				node_suspend_state = #{record.nodeSuspendState,jdbcType=VARCHAR},
+			</if>
+			<if test="record.remark != null">
+				remark = #{record.remark,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.userId != null">
+				user_id = #{record.userId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userName != null">
+				user_name = #{record.userName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update update_record
+		set sid = #{record.sid,jdbcType=VARCHAR},
+			subject_id = #{record.subjectId,jdbcType=VARCHAR},
+			subject_type = #{record.subjectType,jdbcType=VARCHAR},
+			node_status_code = #{record.nodeStatusCode,jdbcType=VARCHAR},
+			node_suspend_state = #{record.nodeSuspendState,jdbcType=VARCHAR},
+			remark = #{record.remark,jdbcType=VARCHAR},
+			create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			user_id = #{record.userId,jdbcType=VARCHAR},
+			user_name = #{record.userName,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="txc.xxy.ssm.model.UpdateRecord">
+		update update_record
+		<set>
+			<if test="subjectId != null">
+				subject_id = #{subjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectType != null">
+				subject_type = #{subjectType,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeStatusCode != null">
+				node_status_code = #{nodeStatusCode,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeSuspendState != null">
+				node_suspend_state = #{nodeSuspendState,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where sid = #{sid,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="txc.xxy.ssm.model.UpdateRecord">
+		update update_record
+		set subject_id = #{subjectId,jdbcType=VARCHAR},
+			subject_type = #{subjectType,jdbcType=VARCHAR},
+			node_status_code = #{nodeStatusCode,jdbcType=VARCHAR},
+			node_suspend_state = #{nodeSuspendState,jdbcType=VARCHAR},
+			remark = #{remark,jdbcType=VARCHAR},
+			create_time = #{createTime,jdbcType=TIMESTAMP},
+			user_id = #{userId,jdbcType=VARCHAR},
+			user_name = #{userName,jdbcType=VARCHAR}
+		where sid = #{sid,jdbcType=VARCHAR}
+	</update>
+</mapper>

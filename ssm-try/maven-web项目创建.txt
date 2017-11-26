@@ -1,0 +1,16 @@
+1. new 一个maven model/project,点击下一步
+2. 勾选 create a simple project(skip archetype selection),点击下一步
+3. 选择packaging 形式为war
+4. 修改web.xml
+
+
+
+
+
+选择packaging 形式为war
+选择packaging 形式为war
+选择packaging 形式为war
+选择packaging 形式为war
+选择packaging 形式为war
+选择packaging 形式为war
+这个很重要.一般都会忘记这个

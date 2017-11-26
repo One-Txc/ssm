@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<!-- 配置 Shiro 的 SecurityManager Bean. -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<!-- 开启shiro session -->
+		<property name="cacheManager" ref="cacheManager" />
+		<property name="sessionManager" ref="sessionManager" />
+		<property name="realm" ref="realm" />
+	</bean>
+
+	<!-- shiro redisManager -->
+	<bean id="redisManager" class="org.crazycake.shiro.RedisManager">
+		<property name="host" value="${redis.host}" />
+		<property name="port" value="${redis.port}" />
+		<property name="expire" value="${redisManager.expire}" />
+		<property name="password" value="${redis.password}" />
+		<!-- optional properties: <property name="timeout" value="10000"/> <property 
+			name="password" value="123456"/> -->
+	</bean>
+	<!-- redisSessionDAO -->
+	<bean id="redisSessionDAO" class="com.n22.cs.comp.shiro.CustRedisSessionDAO">
+		<property name="redisManager" ref="redisManager" />
+	</bean>
+	 
+	<!-- sessionManager -->
+	<bean id="sessionManager"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+<!-- 		<property name="sessionListeners" > -->
+<!-- 			<list> -->
+<!-- 				<ref bean="sessionListener" /> -->
+<!-- 			</list> -->
+<!-- 		</property> -->
+		<!-- 是否在会话过期后会调用SessionDAO的delete方法删除会话 默认true -->
+		<property name="deleteInvalidSessions" value="true" />
+		
+		<!-- 会话验证器调度时间 -->
+		<property name="sessionValidationInterval" value="1800000" />
+		<!-- 会话周期 -->
+		<property name="globalSessionTimeout" value="1800000" />
+
+		<!-- session存储的实现 -->
+		<property name="sessionDAO" ref="redisSessionDAO" />
+		<!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
+		<property name="sessionIdCookie" ref="sharesession" />
+		<!-- 定时检查失效的session -->
+		<property name="sessionValidationSchedulerEnabled" value="true" />
+	</bean>
+
+	<!-- sessionIdCookie的实现,用于重写覆盖容器默认的JSESSIONID -->
+	<bean id="sharesession" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<!-- cookie的name,对应的默认是 JSESSIONID -->
+		<constructor-arg name="name" value="DEMAND_JSESSIONID" />
+		<!-- jsessionId的path为 / 用于多个系统共享jsessionId -->
+		<property name="path" value="/" />
+		<property name="httpOnly" value="true" />
+	</bean>
+
+
+	<!-- cacheManager -->
+	<bean id="cacheManager" class="org.crazycake.shiro.RedisCacheManager">
+		<property name="redisManager" ref="redisManager" />
+	</bean>
+
+	<!-- 配置 Bean 后置处理器: 会自动的调用和 Spring 整合后各个组件的生命周期方法. -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	
+	<!-- 启用shiro 注解 -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor"/>
+	
+	<bean id="custRolesAuthorizationFilter" class="com.n22.cs.comp.shiro.CustRolesAuthorizationFilter" />
+
+	<!-- 配置 ShiroFilter bean: 该 bean 的 id 必须和 web.xml 文件中配置的 shiro filter 的 
+		name 一致 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<!-- 配置登陆页面 -->
+		<property name="loginUrl" value="${loginUrl}" />
+		<property name="unauthorizedUrl" value="${unauthorizedUrl}" />
+		<property name="filters">
+			<map>
+				<entry key="roles">
+					 <ref bean="custRolesAuthorizationFilter"/>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean
+		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="securityManager" />
+	</bean>
+
+
+
+</beans> 

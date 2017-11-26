@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+     ">
+	<!-- springmvc基本配置 -->
+	
+	<context:property-placeholder
+		ignore-unresolvable="true" location="classpath*:ssm-try-config.properties" />
+
+	<!-- 启用注解扫描，并定义组件查找规则 ，mvc层只负责扫描@Controller -->
+	<context:component-scan base-package="txc.xxy.ssm.web.controller" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	<context:annotation-config />
+
+	<!--
+	&lt;!&ndash; 自定义转换器 &ndash;&gt;
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"> 
+       	<property name="converters">
+       		<list>
+       		    <bean class="txc.xxy.ssm.web.converter.DateConverter"></bean>
+       		    <bean class="txc.xxy.ssm.web.converter.TimestampConvertr"></bean>
+       		</list>
+       	</property>
+    </bean>  
+    &lt;!&ndash; 注册转化器 &ndash;&gt;
+    <mvc:annotation-driven conversion-service="conversionService" />
+	-->
+
+	<!-- 静态文件配置 -->
+	<mvc:resources mapping="/js/**" location="/js/"
+		cache-period="31556926" />
+	<mvc:resources mapping="/css/**" location="/css/"
+		cache-period="31556926" />
+	<mvc:resources mapping="/img/**" location="/img/"
+		cache-period="31556926" />
+
+
+	<!-- velocity 模板配置 -->
+	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/templates" />
+		<property name="configLocation" value="classpath:velocity.properties" />
+	</bean>
+	<!-- 自定义视图解析器 -->
+	<bean id="viewResolver" class="com.n22.cs.comp.common.spring.CustVelocityViewResolver">
+		<property name="cache" value="true" />
+		<property name="prefix" value="/screen/" />              <!-- 相对于 velocityConfig里的resourceLoaderPath, 即/WEB-INF/templates/screen/ -->
+		<property name="suffix" value=".vm" />                    <!-- 模板文件后缀,最终拼凑为: /WEB-INF/templates/screen/xxx/xxx.vm -->
+		<!--自定义的CustVelocityViewResolver类不使用这个属性了，使用layouts.xml来设置模板-->
+		<!-- <property name="layoutUrl" value="layout/blankLayout.vm"/> 即/WEB-INF/templates/layout/default.vm -->
+
+		<!-- 使用springMacro、使用servlet的对象 -->
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="exposeRequestAttributes" value="true" />
+		<property name="exposeSessionAttributes" value="true" />
+		<property name="contentType" value="text/html;charset=UTF-8" />
+		<property name="allowSessionOverride" value="true" />
+		<property name="requestContextAttribute" value="rc" />
+		<!-- spring的日期格式化 -->
+		<property name="dateToolAttribute" value="dateTool" />
+		<!-- 公共变量 -->
+		<property name="attributesMap">
+			<map>
+				<entry key="domain" value="/" />
+				<entry key="jsVersion" value="${js.version}" />
+				<entry key="jsMin" value="${js.min}" />
+			</map>
+		</property>
+		<!-- velocity toolbox 可在vm页面中使用的工具 -->
+		<property name="toolboxConfigLocation" value="WEB-INF/classes/velocity-toolbox.xml" />
+	</bean>
+
+
+	<!-- JSON转换 -->
+	<bean id="mappingJacksonHttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/plain;charset=utf-8</value>
+				<value>text/html;charset=utf-8</value>
+				<value>text/json;charset=utf-8</value>
+				<value>application/json;charset=utf-8</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 定义处理器映射，处理适配器 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJacksonHttpMessageConverter" /><!-- json转换器 -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- 异常统一处理-待实现 TODO -->
+	<!-- <bean class="com.n22.cs.demand.common.ExceptionHandler" /> -->
+
+</beans> 

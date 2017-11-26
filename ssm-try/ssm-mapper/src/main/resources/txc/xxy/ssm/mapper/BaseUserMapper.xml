@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="txc.xxy.ssm.mapper.BaseUserMapper">
+	<resultMap id="BaseResultMap" type="txc.xxy.ssm.model.BaseUser">
+		<id column="user_id" jdbcType="BIGINT" property="userId" />
+		<result column="real_name" jdbcType="VARCHAR" property="realName" />
+		<result column="icon_img_url" jdbcType="VARCHAR" property="iconImgUrl" />
+		<result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+		<result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+		<result column="nation_code" jdbcType="VARCHAR" property="nationCode" />
+		<result column="user_mobile" jdbcType="VARCHAR" property="userMobile" />
+		<result column="open_id" jdbcType="VARCHAR" property="openId" />
+		<result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+		<result column="dept_id" jdbcType="BIGINT" property="deptId" />
+		<result column="org_id" jdbcType="BIGINT" property="orgId" />
+		<result column="status" jdbcType="CHAR" property="status" />
+		<result column="valid_flag" jdbcType="CHAR" property="validFlag" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="txc.xxy.ssm.model.BaseUser">
+		<result column="user_ext" jdbcType="LONGVARCHAR" property="userExt" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		user_id, real_name, icon_img_url, user_account, user_pwd, nation_code, user_mobile, 
+		open_id, last_login_time, dept_id, org_id, status, valid_flag, create_time, update_time
+	</sql>
+	<sql id="Blob_Column_List">
+		user_ext
+	</sql>
+	<select id="selectByExampleWithBLOBs" parameterType="txc.xxy.ssm.model.BaseUserExample" resultMap="ResultMapWithBLOBs">
+
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'false' as QUERYID,
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from base_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByExample" parameterType="txc.xxy.ssm.model.BaseUserExample" resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'false' as QUERYID,
+		<include refid="Base_Column_List" />
+		from base_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+		select 
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from base_user
+		where user_id = #{userId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from base_user
+		where user_id = #{userId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="txc.xxy.ssm.model.BaseUserExample">
+		delete from base_user
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="txc.xxy.ssm.model.BaseUser">
+		insert into base_user (user_id, real_name, icon_img_url, 
+			user_account, user_pwd, nation_code, 
+			user_mobile, open_id, last_login_time, 
+			dept_id, org_id, status, valid_flag, 
+			create_time, update_time, user_ext
+			)
+		values (#{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{iconImgUrl,jdbcType=VARCHAR}, 
+			#{userAccount,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}, #{nationCode,jdbcType=VARCHAR}, 
+			#{userMobile,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+			#{deptId,jdbcType=BIGINT}, #{orgId,jdbcType=BIGINT}, #{status,jdbcType=CHAR}, #{validFlag,jdbcType=CHAR}, 
+			#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{userExt,jdbcType=LONGVARCHAR}
+			)
+	</insert>
+	<insert id="insertSelective" parameterType="txc.xxy.ssm.model.BaseUser">
+		insert into base_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="realName != null">
+				real_name,
+			</if>
+			<if test="iconImgUrl != null">
+				icon_img_url,
+			</if>
+			<if test="userAccount != null">
+				user_account,
+			</if>
+			<if test="userPwd != null">
+				user_pwd,
+			</if>
+			<if test="nationCode != null">
+				nation_code,
+			</if>
+			<if test="userMobile != null">
+				user_mobile,
+			</if>
+			<if test="openId != null">
+				open_id,
+			</if>
+			<if test="lastLoginTime != null">
+				last_login_time,
+			</if>
+			<if test="deptId != null">
+				dept_id,
+			</if>
+			<if test="orgId != null">
+				org_id,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="validFlag != null">
+				valid_flag,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="userExt != null">
+				user_ext,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="realName != null">
+				#{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="iconImgUrl != null">
+				#{iconImgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="userAccount != null">
+				#{userAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="userPwd != null">
+				#{userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="nationCode != null">
+				#{nationCode,jdbcType=VARCHAR},
+			</if>
+			<if test="userMobile != null">
+				#{userMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="openId != null">
+				#{openId,jdbcType=VARCHAR},
+			</if>
+			<if test="lastLoginTime != null">
+				#{lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deptId != null">
+				#{deptId,jdbcType=BIGINT},
+			</if>
+			<if test="orgId != null">
+				#{orgId,jdbcType=BIGINT},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="validFlag != null">
+				#{validFlag,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userExt != null">
+				#{userExt,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByExampleSelective" parameterType="map">
+		update base_user
+		<set>
+			<if test="record.userId != null">
+				user_id = #{record.userId,jdbcType=BIGINT},
+			</if>
+			<if test="record.realName != null">
+				real_name = #{record.realName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.iconImgUrl != null">
+				icon_img_url = #{record.iconImgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userAccount != null">
+				user_account = #{record.userAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userPwd != null">
+				user_pwd = #{record.userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="record.nationCode != null">
+				nation_code = #{record.nationCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userMobile != null">
+				user_mobile = #{record.userMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="record.openId != null">
+				open_id = #{record.openId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.lastLoginTime != null">
+				last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.deptId != null">
+				dept_id = #{record.deptId,jdbcType=BIGINT},
+			</if>
+			<if test="record.orgId != null">
+				org_id = #{record.orgId,jdbcType=BIGINT},
+			</if>
+			<if test="record.status != null">
+				status = #{record.status,jdbcType=CHAR},
+			</if>
+			<if test="record.validFlag != null">
+				valid_flag = #{record.validFlag,jdbcType=CHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.userExt != null">
+				user_ext = #{record.userExt,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExampleWithBLOBs" parameterType="map">
+		update base_user
+		set user_id = #{record.userId,jdbcType=BIGINT},
+			real_name = #{record.realName,jdbcType=VARCHAR},
+			icon_img_url = #{record.iconImgUrl,jdbcType=VARCHAR},
+			user_account = #{record.userAccount,jdbcType=VARCHAR},
+			user_pwd = #{record.userPwd,jdbcType=VARCHAR},
+			nation_code = #{record.nationCode,jdbcType=VARCHAR},
+			user_mobile = #{record.userMobile,jdbcType=VARCHAR},
+			open_id = #{record.openId,jdbcType=VARCHAR},
+			last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+			dept_id = #{record.deptId,jdbcType=BIGINT},
+			org_id = #{record.orgId,jdbcType=BIGINT},
+			status = #{record.status,jdbcType=CHAR},
+			valid_flag = #{record.validFlag,jdbcType=CHAR},
+			create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			user_ext = #{record.userExt,jdbcType=LONGVARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update base_user
+		set user_id = #{record.userId,jdbcType=BIGINT},
+			real_name = #{record.realName,jdbcType=VARCHAR},
+			icon_img_url = #{record.iconImgUrl,jdbcType=VARCHAR},
+			user_account = #{record.userAccount,jdbcType=VARCHAR},
+			user_pwd = #{record.userPwd,jdbcType=VARCHAR},
+			nation_code = #{record.nationCode,jdbcType=VARCHAR},
+			user_mobile = #{record.userMobile,jdbcType=VARCHAR},
+			open_id = #{record.openId,jdbcType=VARCHAR},
+			last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
+			dept_id = #{record.deptId,jdbcType=BIGINT},
+			org_id = #{record.orgId,jdbcType=BIGINT},
+			status = #{record.status,jdbcType=CHAR},
+			valid_flag = #{record.validFlag,jdbcType=CHAR},
+			create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="txc.xxy.ssm.model.BaseUser">
+		update base_user
+		<set>
+			<if test="realName != null">
+				real_name = #{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="iconImgUrl != null">
+				icon_img_url = #{iconImgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="userAccount != null">
+				user_account = #{userAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="userPwd != null">
+				user_pwd = #{userPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="nationCode != null">
+				nation_code = #{nationCode,jdbcType=VARCHAR},
+			</if>
+			<if test="userMobile != null">
+				user_mobile = #{userMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="openId != null">
+				open_id = #{openId,jdbcType=VARCHAR},
+			</if>
+			<if test="lastLoginTime != null">
+				last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deptId != null">
+				dept_id = #{deptId,jdbcType=BIGINT},
+			</if>
+			<if test="orgId != null">
+				org_id = #{orgId,jdbcType=BIGINT},
+			</if>
+			<if test="status != null">
+				status = #{status,jdbcType=CHAR},
+			</if>
+			<if test="validFlag != null">
+				valid_flag = #{validFlag,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="userExt != null">
+				user_ext = #{userExt,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where user_id = #{userId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="txc.xxy.ssm.model.BaseUser">
+		update base_user
+		set real_name = #{realName,jdbcType=VARCHAR},
+			icon_img_url = #{iconImgUrl,jdbcType=VARCHAR},
+			user_account = #{userAccount,jdbcType=VARCHAR},
+			user_pwd = #{userPwd,jdbcType=VARCHAR},
+			nation_code = #{nationCode,jdbcType=VARCHAR},
+			user_mobile = #{userMobile,jdbcType=VARCHAR},
+			open_id = #{openId,jdbcType=VARCHAR},
+			last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+			dept_id = #{deptId,jdbcType=BIGINT},
+			org_id = #{orgId,jdbcType=BIGINT},
+			status = #{status,jdbcType=CHAR},
+			valid_flag = #{validFlag,jdbcType=CHAR},
+			create_time = #{createTime,jdbcType=TIMESTAMP},
+			update_time = #{updateTime,jdbcType=TIMESTAMP},
+			user_ext = #{userExt,jdbcType=LONGVARCHAR}
+		where user_id = #{userId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="txc.xxy.ssm.model.BaseUser">
+		update base_user
+		set real_name = #{realName,jdbcType=VARCHAR},
+			icon_img_url = #{iconImgUrl,jdbcType=VARCHAR},
+			user_account = #{userAccount,jdbcType=VARCHAR},
+			user_pwd = #{userPwd,jdbcType=VARCHAR},
+			nation_code = #{nationCode,jdbcType=VARCHAR},
+			user_mobile = #{userMobile,jdbcType=VARCHAR},
+			open_id = #{openId,jdbcType=VARCHAR},
+			last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+			dept_id = #{deptId,jdbcType=BIGINT},
+			org_id = #{orgId,jdbcType=BIGINT},
+			status = #{status,jdbcType=CHAR},
+			valid_flag = #{validFlag,jdbcType=CHAR},
+			create_time = #{createTime,jdbcType=TIMESTAMP},
+			update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where user_id = #{userId,jdbcType=BIGINT}
+	</update>
+</mapper>

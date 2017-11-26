@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>txc.xxy</groupId>
+	<artifactId>ssm-try</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>ssm-config</module>
+		<module>ssm-web</module>
+		<module>ssm-model</module>
+		<module>ssm-mapper</module>
+		<module>ssm-mapper-ext</module>
+		<module>ssm-model-ext</module>
+		<module>ssm-common</module>
+		<module>ssm-biz</module>
+		<module>ssm-shiro-ext</module>
+	</modules>
+
+	<!-- 集中定义依赖版本号 -->
+	<properties>
+		<project.name>demand</project.name>
+		<junit.version>4.12</junit.version>
+		<spring.version>4.1.3.RELEASE</spring.version>
+		<mybatis.version>3.2.8</mybatis.version>
+		<mybatis.spring.version>1.2.2</mybatis.spring.version>
+		<mybatis.paginator.version>1.2.16</mybatis.paginator.version>
+		<pagehelper.version>4.1.1</pagehelper.version>
+		<mysql.version>5.1.37</mysql.version>
+		<slf4j.version>1.6.4</slf4j.version>
+		<jackson.version>2.4.2</jackson.version>
+		<druid.version>1.0.9</druid.version>
+		<jstl.version>1.2</jstl.version>
+		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+		<joda-time.version>2.9.1</joda-time.version>
+		<commons-lang3.version>3.5</commons-lang3.version>
+		<maven.autoconfig.version>1.2</maven.autoconfig.version>
+		<jedis.version>2.8.1</jedis.version>
+		<kaptcha.version>2.3.2</kaptcha.version>
+		<velocity.version>1.7</velocity.version>
+		<velocity-tools.version>2.0</velocity-tools.version>
+		<comp.version>0.0.1-SNAPSHOT</comp.version>
+		<shiro.version>1.2.4</shiro.version>
+		<shiro-redis.version>2.4.2.1-RELEASE</shiro-redis.version>
+		<velocity-tools.version>2.0</velocity-tools.version>
+	</properties>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- 组件模块 -->
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>my-comp-common</artifactId>
+				<version>${comp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>my-comp-redis</artifactId>
+				<version>${comp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>my-comp-shiro</artifactId>
+				<version>${comp.version}</version>
+			</dependency>
+
+			<!-- 内部项目模块 -->
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>ssm-config</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>ssm-web</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>ssm-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>ssm-mapper</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>ssm-mapper-ext</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>ssm-model-ext</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>ssm-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>ssm-biz</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>ssm-shiro-ext</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+
+			<!-- 时间操作组件 -->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda-time.version}</version>
+			</dependency>
+
+			<!-- 单元测试 -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- 日志处理 -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<!-- Mybatis -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis-spring</artifactId>
+				<version>${mybatis.spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mybatis.generator</groupId>
+				<artifactId>mybatis-generator-core</artifactId>
+				<version>${mybatis-generator-core.version}</version>
+			</dependency>
+			<!-- MyBatis分页组件 -->
+			<dependency>
+				<groupId>com.github.miemiedev</groupId>
+				<artifactId>mybatis-paginator</artifactId>
+				<version>${mybatis.paginator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper</artifactId>
+				<version>${pagehelper.version}</version>
+			</dependency>
+			<!-- MySql -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+			<!-- 连接池 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
+			<!-- Spring -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${javax.servlet-api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- Apache工具组件 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+
+			<!-- 谷歌验证码 -->
+			<dependency>
+				<groupId>com.github.penggle</groupId>
+				<artifactId>kaptcha</artifactId>
+				<version>${kaptcha.version}</version>
+			</dependency>
+
+
+			<!-- velocity -->
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>${velocity.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity-tools</artifactId>
+				<version>${velocity-tools.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>commons-beanutils</groupId>
+						<artifactId>commons-beanutils</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>2.4</version>
+			</dependency>
+			
+			<!-- shiro -->
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-core</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-spring</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.crazycake</groupId>
+				<artifactId>shiro-redis</artifactId>
+				<version>${shiro-redis.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>redis.clients</groupId>
+						<artifactId>jedis</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+</project>

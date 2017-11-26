@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+	<tool>
+		<key>number</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.NumberTool</class>
+	</tool>
+	<tool>
+		<key>math</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.MathTool</class>
+	</tool>
+	<tool>
+		<key>date</key>
+		<scope>application</scope>
+		<class>org.apache.velocity.tools.generic.ComparisonDateTool</class>
+		<parameter name="format" value="yyyy-MM-dd" />
+		<parameter name="depth" value="2" />
+		<parameter name="skip" value="month" />
+	</tool>
+	<!-- webapp contextPath -->
+	<tool>
+		<key>link</key>
+		<scope>request</scope>
+		<class>org.apache.velocity.tools.view.tools.LinkTool</class>
+	</tool>
+	<tool>
+		<key>stringUtils</key>
+		<scope>request</scope>
+		<class>org.apache.commons.lang3.StringUtils</class>
+	</tool>
+	<!-- <tool>
+		key>shiro</key可选默认为 shiro
+		<key>shiro</key>
+		<scope>application</scope>
+		<class>com.n22.cs.comp.shiro.Permission</class>
+	</tool>
+	<tool>
+		<key>menuUtil</key>
+		<scope>request</scope>
+		<class>com.n22.cs.comp.sysmanage.common.MenuUtil</class>
+	</tool>
+	<tool>
+		<key>enumUtil</key>
+		<scope>request</scope>
+		<class>com.n22.cs.comp.sysmanage.common.EnumUtil</class>
+	</tool>
+	<tool>
+		<key>roleTypeEnumUtil</key>
+		<scope>request</scope>
+		<class>com.n22.cs.demand.model.ext.enums.RoleTypeEnumUtil</class>
+	</tool>
+	<tool>
+		<key>bizUtil</key>
+		<scope>request</scope>
+		<class>com.n22.cs.comp.sysmanage.common.BizUtil</class>
+	</tool>
+	<tool>
+		<key>sessionUtil</key>
+		<scope>request</scope>
+		<class>com.n22.cs.comp.sysmanage.common.SessionUtil</class>
+	</tool>
+	<tool>
+		<key>sessionUtilExt</key>
+		<scope>request</scope>
+		<class>com.n22.cs.demand.common.SessionUtilExt</class>
+	</tool> -->
+	
+</toolbox>
