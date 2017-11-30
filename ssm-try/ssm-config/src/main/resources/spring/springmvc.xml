@@ -21,8 +21,7 @@
 	</context:component-scan>
 	<context:annotation-config />
 
-	<!--
-	&lt;!&ndash; 自定义转换器 &ndash;&gt;
+	<!-- 自定义转换器 -->
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean"> 
        	<property name="converters">
        		<list>
@@ -31,9 +30,8 @@
        		</list>
        	</property>
     </bean>  
-    &lt;!&ndash; 注册转化器 &ndash;&gt;
+    <!-- 注册转化器 -->
     <mvc:annotation-driven conversion-service="conversionService" />
-	-->
 
 	<!-- 静态文件配置 -->
 	<mvc:resources mapping="/js/**" location="/js/"
