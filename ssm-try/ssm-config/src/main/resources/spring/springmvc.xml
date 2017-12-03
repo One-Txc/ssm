@@ -15,7 +15,7 @@
 		ignore-unresolvable="true" location="classpath*:ssm-try-config.properties" />
 
 	<!-- 启用注解扫描，并定义组件查找规则 ，mvc层只负责扫描@Controller -->
-	<context:component-scan base-package="txc.xxy.ssm.web.controller" use-default-filters="false">
+	<context:component-scan base-package="txc.xxy.ssm.web" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>

@@ -35,6 +35,7 @@
 				/r/html/student.htm = roles[student]
 				/js/** = anon
 				/r/html/** = roles[login]
+				/** = anon
 				<!-- /r/bug/**=roles[login]
 				/basedict/**=roles[login,admin]
 				/demand/** =roles[login] -->				
