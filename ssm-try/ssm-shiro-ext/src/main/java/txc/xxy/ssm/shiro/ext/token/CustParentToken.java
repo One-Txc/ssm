@@ -12,6 +12,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import com.n22.cs.comp.shiro.exceprion.SysManageException;
 
 import txc.xxy.ssm.shiro.ext.model.bo.LoginResultBO;
+import txc.xyz.base.model.BaseUser;
 
 /**
   *
@@ -35,7 +36,7 @@ public abstract class CustParentToken extends UsernamePasswordToken{
 	}
 	
 	//登录方法
-	public abstract LoginResultBO doLogin() throws SysManageException;
+	public abstract BaseUser doLogin() throws SysManageException;
 	
 	//登录方式描述
 	public abstract String loginTypeDes();

@@ -14,7 +14,7 @@ public class DispatcherUtils {
 	/**
 	 * 
 	 * @description : 访问路径为 r/home/index.htm 的 则直接跳转至 jsp/home/index.jsp中
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月6日 下午9:02:10
 	 */
 	public static String dispatcher(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -52,7 +52,7 @@ public class DispatcherUtils {
 	/**
 	 * 
 	 * @description : 绑定请求参数
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年1月14日 下午2:21:26
 	 */
  	private static String bindParam(HttpServletRequest request, Model model) {

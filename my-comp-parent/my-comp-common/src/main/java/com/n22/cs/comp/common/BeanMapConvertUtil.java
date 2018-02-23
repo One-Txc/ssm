@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @desc bean,map相互转换工具类
- * @author jackphang
+ * @author xxx
  * @date 2016年10月10日 上午10:12:11
  */
 public class BeanMapConvertUtil {

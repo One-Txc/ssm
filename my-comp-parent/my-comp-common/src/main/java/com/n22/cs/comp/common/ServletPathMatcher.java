@@ -2,7 +2,7 @@ package com.n22.cs.comp.common;
 
 /**
  * @desc 用于匹配请求路径
- * @author jackphang
+ * @author xxx
  * @date 2016年10月29日 下午12:59:25
  */
 public class ServletPathMatcher {
@@ -17,7 +17,7 @@ public class ServletPathMatcher {
 	 * @desc: 三种类型: endsWithMatch(eg. /xxx*=/xxx/xyz), startsWithMatch(eg.
 	 *        *.xxx=abc.xxx), equals(eg. /xxx=/xxx).
 	 * @notice : *xxx* 将会匹配 *xxxyyyy. endsWithMatch first.
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月29日 下午1:02:08
 	 * @param pattern
 	 * @param source

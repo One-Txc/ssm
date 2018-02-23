@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 暂时方案：解决shiro登出时抛异常的问题
  * 
- * @author jackphang
+ * @author xxx
  * @date 2016年5月8日 下午3:35:01
  * @version 1.0
  */

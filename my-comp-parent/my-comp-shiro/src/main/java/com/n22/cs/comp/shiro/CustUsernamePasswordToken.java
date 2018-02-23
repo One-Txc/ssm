@@ -7,7 +7,7 @@ import com.n22.cs.comp.common.model.ResultData;
 /**
  * 自定义token,返回更多的用户信息
  * 
- * @author jackphang
+ * @author xxx
  * @date 2016年4月15日 下午2:51:04
  * @version 1.0
  */

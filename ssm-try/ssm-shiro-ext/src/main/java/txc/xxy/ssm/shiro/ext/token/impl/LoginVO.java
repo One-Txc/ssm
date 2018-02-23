@@ -13,21 +13,21 @@ import org.joda.time.DateTime;
 import com.n22.cs.comp.common.ApplicationContextUtil;
 import com.n22.cs.comp.shiro.exceprion.SysManageException;
 
-import txc.xxy.ssm.mapper.BaseRoleMapper;
-import txc.xxy.ssm.mapper.BaseUserMapper;
-import txc.xxy.ssm.mapper.BaseUserRoleRelaMapper;
-import txc.xxy.ssm.model.BaseRole;
-import txc.xxy.ssm.model.BaseUser;
-import txc.xxy.ssm.model.BaseUserExample;
-import txc.xxy.ssm.model.BaseUserRoleRela;
-import txc.xxy.ssm.model.BaseUserRoleRelaExample;
+import txc.xyz.base.mapper.BaseRoleMapper;
+import txc.xyz.base.mapper.BaseUserMapper;
+import txc.xyz.base.mapper.BaseUserRoleRelaMapper;
+import txc.xyz.base.model.BaseRole;
+import txc.xyz.base.model.BaseUser;
+import txc.xyz.base.model.BaseUserExample;
+import txc.xyz.base.model.BaseUserRoleRela;
+import txc.xyz.base.model.BaseUserRoleRelaExample;
 import txc.xxy.ssm.shiro.ext.common.enums.StatusEnum;
 import txc.xxy.ssm.shiro.ext.model.bo.LoginResultBO;
 import txc.xxy.ssm.shiro.ext.token.CustParentToken;
 
 /**
  * @desc (用户名-密码)登录
- * @author jackphang
+ * @author xxx
  * @date 2016年11月24日 上午11:31:56
  */
 public class LoginVO extends CustParentToken{
@@ -41,8 +41,8 @@ public class LoginVO extends CustParentToken{
 	
 	// 依赖对象
 	private BaseUserMapper baseUserMapper;
-	private BaseRoleMapper baseRoleMapper;
-	private BaseUserRoleRelaMapper baseUserRoleRelaMapper;
+//	private BaseRoleMapper baseRoleMapper;
+//	private BaseUserRoleRelaMapper baseUserRoleRelaMapper;
 	
 	
 	
@@ -50,8 +50,8 @@ public class LoginVO extends CustParentToken{
 		super();
 		//初始化依赖对象
 		baseUserMapper = ApplicationContextUtil.getBean(BaseUserMapper.class);
-		baseRoleMapper = ApplicationContextUtil.getBean(BaseRoleMapper.class);
-		baseUserRoleRelaMapper = ApplicationContextUtil.getBean(BaseUserRoleRelaMapper.class);
+//		baseRoleMapper = ApplicationContextUtil.getBean(BaseRoleMapper.class);
+//		baseUserRoleRelaMapper = ApplicationContextUtil.getBean(BaseUserRoleRelaMapper.class);
 	}
 
 	public LoginVO(String username, String password, String userType, String loginIp) {
@@ -86,7 +86,7 @@ public class LoginVO extends CustParentToken{
 
 	
 
-	public LoginResultBO doLogin() throws SysManageException {
+	public BaseUser doLogin() throws SysManageException {
 		if (getPassword() == null || getPassword().length <= 0) {
 			throw new AuthenticationException("登录密码为空");
 		}
@@ -108,7 +108,7 @@ public class LoginVO extends CustParentToken{
 			throw new SysManageException("加密密码异常", e);
 		}
 		BaseUserExample baseUserExample = new BaseUserExample();
-		txc.xxy.ssm.model.BaseUserExample.Criteria criteria= baseUserExample.createCriteria();
+		txc.xyz.base.model.BaseUserExample.Criteria criteria= baseUserExample.createCriteria();
 		criteria.andUserAccountEqualTo(getUsername());
 		List<BaseUser> userList = baseUserMapper.selectByExampleWithBLOBs(baseUserExample);
 		if(userList.isEmpty()){
@@ -124,44 +124,11 @@ public class LoginVO extends CustParentToken{
 		if(StringUtils.isNotBlank(getOpenid())){
 			user.setOpenId(getOpenid());
 		}
-		loginResultBO = checkUser(user);
+
+		//loginResultBO.setBaseUser(user);
+		//loginResultBO = checkUser(user);
 		
-		return loginResultBO;
-	}
-	
-	/**
-	 * @desc: 校验用户合法性
-	 * @date:2017年2月7日 上午10:49:21
-	 * @param user
-	 * @return
-	 * @throws SysManageException
-	 *
-	 */
-	private LoginResultBO checkUser(BaseUser user) throws SysManageException {
-		if (Objects.equals(user.getStatus(), StatusEnum.STATUS_0.getValue())) {
-			throw new SysManageException("该账号已被冻结");
-		}
-		// 查询当前用户拥有的角色---待优化 TODO
-		BaseUserRoleRelaExample baseUserRoleRelaExample = new BaseUserRoleRelaExample();
-		txc.xxy.ssm.model.BaseUserRoleRelaExample.Criteria baseUserRoleRelaCriteria= baseUserRoleRelaExample.createCriteria();
-		baseUserRoleRelaCriteria.andUserIdEqualTo(user.getUserId());
-		List<BaseUserRoleRela> baseUserRoleRelaList = baseUserRoleRelaMapper.selectByExample(baseUserRoleRelaExample);
-		List<BaseRole> roleList = new ArrayList<>();
-		if(!baseUserRoleRelaList.isEmpty()){
-			for(BaseUserRoleRela record:baseUserRoleRelaList){
-				BaseRole role = baseRoleMapper.selectByPrimaryKey(record.getRoleId());
-				if(role != null){
-					roleList.add(role);
-				}
-			}
-		}
-		user.setUserPwd(null);
-		LoginResultBO loginResultBO = new LoginResultBO();
-		loginResultBO.setBaseUser(user);
-		loginResultBO.setRoleList(roleList);
-		user.setLastLoginTime(new Timestamp(DateTime.now().getMillis()));
-		baseUserMapper.updateByPrimaryKeySelective(user);
-		return loginResultBO;
+		return user;
 	}
 	
 	@Override

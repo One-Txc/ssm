@@ -20,7 +20,7 @@ public class OutUtil {
 
 	/**
 	 * @desc:out.println 输出内容并关闭out
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月19日 下午3:51:02
 	 * @param resp
 	 * @param outStr
@@ -44,7 +44,7 @@ public class OutUtil {
 
 	/**
 	 * @desc:out.println 输出内容并关闭out
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月19日 下午3:51:02
 	 * @param resp
 	 * @param outStr

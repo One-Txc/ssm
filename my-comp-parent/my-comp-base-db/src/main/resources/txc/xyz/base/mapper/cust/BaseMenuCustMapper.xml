@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="txc.xyz.base.mapper.cust.BaseMenuCustMapper">
+    <select id="getAllMenuRole" resultType="txc.xyz.base.model.cust.RoleAuthCust">
+        SELECT rm.role_id AS roleId,
+                rm.menu_id AS menuId,
+                m.menu_name AS menuName,
+                m.menu_url AS menuUrl,
+                m.menu_code AS menuCode
+        FROM base_role_menu_rela rm INNER JOIN base_menu m ON(rm.menu_id=m.menu_id)
+        WHERE m.valid_flag = '1'
+    </select>
+
+</mapper>

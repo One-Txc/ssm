@@ -2,7 +2,7 @@ package txc.xxy.ssm.shiro.ext.common.enums;
 
 /**
  * @desc 登录类型
- * @author jackphang
+ * @author xxx
  * @date 2017年2月7日 上午10:38:21
  */
 public enum LoginTypeEnum {

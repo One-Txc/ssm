@@ -2,7 +2,7 @@ package txc.xxy.ssm.shiro.ext.common.constant;
 
 /**
  * @desc redis key 常量类
- * @author jackphang
+ * @author xxx
  * @date 2016年12月12日 下午7:36:58
  */
 public interface RedisKeyConstant {

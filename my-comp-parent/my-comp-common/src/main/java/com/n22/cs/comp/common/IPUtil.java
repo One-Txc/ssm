@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @desc IP工具类
- * @author jackphang
+ * @author xxx
  * @date 2016年11月3日 下午7:47:45
  */
 public final class IPUtil {
@@ -18,7 +18,7 @@ public final class IPUtil {
 
 	/**
 	 * @desc:获取请求的ip
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年11月3日 下午7:55:43
 	 * @param request
 	 * @return
@@ -62,7 +62,7 @@ public final class IPUtil {
 
 	/**
 	 * @desc:判断是否是内网请求
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年11月3日 下午7:55:27
 	 * @param ipAddress
 	 * @return
@@ -92,7 +92,7 @@ public final class IPUtil {
 
 	/**
 	 * @desc: 获取IP数
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年11月3日 下午7:54:54*
 	 * @param ipAddress
 	 * @return
@@ -116,8 +116,8 @@ public final class IPUtil {
 	/**
 	 * @desc: 判断请求是否是公网域名访问,用于区分生产和本地开发环境
 	 * @remark 适用于http://www.xhlgfsc.com,花生壳
-	 *         http://jackphang.eicp.net,其它情况此处不作处理
-	 * @auth:jackphang
+	 *         http://xxx.eicp.net,其它情况此处不作处理
+	 * @auth:xxx
 	 * @date:2016年11月3日 下午8:27:32
 	 * @param request
 	 * @return

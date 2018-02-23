@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * @desc 签名工具类
- * @author jackphang
+ * @author xxx
  * @date 2016年10月13日 下午3:09:02
  */
 public class SignUtil {
@@ -22,7 +22,7 @@ public class SignUtil {
 
 	/**
 	 * @desc: 创建md5摘要,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月8日 下午6:03:06
 	 * @param paramMap
 	 * @param signKey
@@ -54,7 +54,7 @@ public class SignUtil {
 	/**
 	 * 
 	 * @desc: 将客户端传递来的参数进行签名,遇到空值的参数不参加签名。
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月14日 上午10:57:53
 	 * @param paramJson
 	 *            客户端传递的json参数
@@ -76,7 +76,7 @@ public class SignUtil {
 
 	/**
 	 * @desc:生成签名
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年12月9日 下午2:35:07
 	 * @param serviceName
 	 * @param methodName
@@ -100,7 +100,7 @@ public class SignUtil {
 
 	/**
 	 * @desc: 验签
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月9日 下午5:11:27
 	 * @param paramMap
 	 *            验签的参数

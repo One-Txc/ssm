@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * @desc 自定义返回结果数据结构
- * @author jackphang
+ * @author xxx
  * @date 2016年10月27日 下午2:20:34
  */
 public class ResultData implements Serializable {
@@ -30,7 +30,7 @@ public class ResultData implements Serializable {
 	/**
 	 * 返回结果集
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月15日 上午11:15:31
 	 */
 	public static ResultData build(String stutus, String msg, Map<String, Object> data) {
@@ -44,7 +44,7 @@ public class ResultData implements Serializable {
 	/**
 	 * 返回失败结果集[带失败信息]
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月15日 上午11:15:31
 	 */
 	public static ResultData fail(String status, String msg) {
@@ -54,7 +54,7 @@ public class ResultData implements Serializable {
 	/**
 	 * 返回失败结果集
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月15日 上午11:15:31
 	 */
 	public static ResultData fail(String msg) {
@@ -64,7 +64,7 @@ public class ResultData implements Serializable {
 	/**
 	 * 返回成功结果集[带返回数据]
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月15日 上午11:15:31
 	 */
 	public static ResultData success(Map<String, Object> data) {
@@ -74,7 +74,7 @@ public class ResultData implements Serializable {
 	/**
 	 * 成功返回结果集[不返回数据]
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月15日 上午11:15:31
 	 */
 	public static ResultData success() {
@@ -84,7 +84,7 @@ public class ResultData implements Serializable {
 	/**
 	 * 异常
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月18日 上午11:06:02
 	 */
 	public static ResultData error(String msg) {
@@ -124,7 +124,7 @@ public class ResultData implements Serializable {
 	/**
 	 * 往返回结果集中添加数据
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月15日 下午2:20:07
 	 */
 	public ResultData put(String key, Object value) {
@@ -135,7 +135,7 @@ public class ResultData implements Serializable {
 	/**
 	 * @desc:往data中添加返回数据,key为小写的类名
 	 * @note:只适用于单个对象，不适用于集合
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年12月20日 下午2:18:44
 	 * @param value
 	 * @return

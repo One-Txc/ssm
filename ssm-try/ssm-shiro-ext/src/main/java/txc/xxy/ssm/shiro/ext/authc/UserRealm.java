@@ -2,6 +2,7 @@ package txc.xxy.ssm.shiro.ext.authc;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -19,16 +20,28 @@ import com.n22.cs.comp.shiro.CustAuthenticationException;
 import com.n22.cs.comp.shiro.ShiroConstant;
 import com.n22.cs.comp.shiro.exceprion.SysManageException;
 
-import txc.xxy.ssm.model.BaseUser;
+import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import txc.xxy.ssm.shiro.ext.common.enums.StatusEnum;
+import txc.xyz.base.mapper.*;
+import txc.xyz.base.model.BaseRole;
+import txc.xyz.base.model.BaseUser;
 import txc.xxy.ssm.shiro.ext.common.constant.RedisKeyConstant;
 import txc.xxy.ssm.shiro.ext.model.bo.LoginResultBO;
 import txc.xxy.ssm.shiro.ext.token.CustParentToken;
+import txc.xyz.base.model.BaseUserRoleRela;
+import txc.xyz.base.model.BaseUserRoleRelaExample;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 /**
  * 扩展的 认证、鉴权类
  * 
- * @author jackphang
+ * @author xxx
  * @date 2016年4月14日 上午11:12:29
  * @version 1.0
  */
@@ -38,9 +51,21 @@ public class UserRealm extends AuthorizingRealm {
 	private static final int expired = 1 * 60 * 60;
 	// 初始化标识符
 	private boolean initFlag = false;
-	
-	@Resource
+
+	@Autowired
 	private JedisClient jedisClient;
+	// 依赖对象
+	@Autowired
+	private BaseUserMapper baseUserMapper;
+	@Autowired
+	private BaseRoleMapper baseRoleMapper;
+	@Autowired
+	private BaseUserRoleRelaMapper baseUserRoleRelaMapper;
+	@Autowired
+	private BaseDeptMapper baseDeptMapper;
+	@Autowired
+	private BaseOrgMapper baseOrgMapper;
+
 
 	/**
 	 * 授权方法[权限拦截时调用] 每次访问时会由
@@ -59,19 +84,19 @@ public class UserRealm extends AuthorizingRealm {
 		}
 		info = new SimpleAuthorizationInfo();
 
-		//List<BaseRole> roleList = (List<BaseRole>) session.getAttribute(ShiroConstant.USER_ROLE);
+		List<BaseRole> roleList = (List<BaseRole>) session.getAttribute(ShiroConstant.USER_ROLE);
 		// 登录用户基本权限
 		info.addRole("login");
 		//TODO
-		/*for (BaseRole baseRole : roleList) {
+		for (BaseRole baseRole : roleList) {
 			// 系统管理员则授予所有权限
-			if (Objects.equals(baseRole.getRoleType(), "0")) {
+			if (Objects.equals(baseRole.getRoleType(), "admin")) {
 				// 赋予admin角色
 				info.addRole("admin");
 				session.setAttribute(ShiroConstant.USER_IS_ADMIN, true);
 			}
 			info.addRole(baseRole.getRoleId().toString());
-		}*/
+		}
 		LogTool.info(getClass(),
 				">>>>>>成功初始化当前用户userAccount=" + baseUser.getUserAccount() + "对应的角色数据" + info.getRoles());
 		jedisClient.set(key, info, expired);
@@ -89,7 +114,8 @@ public class UserRealm extends AuthorizingRealm {
 		CustParentToken loginToken = (CustParentToken) token;
 		LoginResultBO loginResultBO = null;
 		try {
-			loginResultBO = loginToken.doLogin();
+			BaseUser user = loginToken.doLogin();
+			loginResultBO = checkUser(user);
 			loginToken.setLoginResultBO(loginResultBO);
 		} catch (Exception e) {
 			LogTool.error(getClass(), e);
@@ -113,16 +139,18 @@ public class UserRealm extends AuthorizingRealm {
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(loginToken.getUsername(), loginToken.getUsername(),
 				realmName);
 		setInitFlag(true);
+
 		// 获取登陆成功后返回的信息
 		setSessionData(loginToken);
 		// 登录成功，手动触发获取该用户对应的所有角色
 		doGetAuthorizationInfo(info.getPrincipals());
 		return info;
 	}
+
 	
 	/**
 	 * @desc: 登录成功后把相应的数据放入session中
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年11月24日 上午11:14:53
 	 * @param token
 	 *
@@ -133,13 +161,12 @@ public class UserRealm extends AuthorizingRealm {
 
 		session.setAttribute(ShiroConstant.CURRENT_LOGIN_USER, loginResultBO.getBaseUser());
 		session.setAttribute(ShiroConstant.USER_ROLE, loginResultBO.getRoleList());
-		session.setAttribute(ShiroConstant.CURRENT_LOGIN_USER_ORG, loginResultBO.getBaseOrgExt());
+		session.setAttribute(ShiroConstant.CURRENT_LOGIN_USER_ORG, loginResultBO.getBaseOrg());
 		session.setAttribute(ShiroConstant.CURRENT_LOGIN_USER_DEPT, loginResultBO.getBaseDept());
 
-		//TODO
-		/*
+		//是否是机构、部门管理员
 		Long userId = loginResultBO.getBaseUser().getUserId();
-		String orgManager = loginResultBO.getBaseOrgExt().getManagerUids();
+		String orgManager = loginResultBO.getBaseOrg().getManagerUids();
 		session.setAttribute(ShiroConstant.USER_IS_ORG_MANAGER, false);
 		if (StringUtils.isNotBlank(orgManager)) {
 			orgManager = "," + orgManager + ",";
@@ -156,8 +183,46 @@ public class UserRealm extends AuthorizingRealm {
 				session.setAttribute(ShiroConstant.USER_IS_DEPT_MANAGER, true);
 			}
 		}
-		*/
 
+	}
+
+
+	/**
+	 * @desc: 校验用户合法性,并且返回LoginResultBO
+	 * @date:2017年2月7日 上午10:49:21
+	 * @param user
+	 * @return
+	 * @throws SysManageException
+	 *
+	 */
+	private LoginResultBO checkUser(BaseUser user) throws SysManageException {
+		if (Objects.equals(user.getStatus(), StatusEnum.STATUS_0.getValue())) {
+			throw new SysManageException("该账号已被冻结");
+		}
+		// 查询当前用户拥有的角色---待优化 TODO
+		BaseUserRoleRelaExample baseUserRoleRelaExample = new BaseUserRoleRelaExample();
+		txc.xyz.base.model.BaseUserRoleRelaExample.Criteria baseUserRoleRelaCriteria= baseUserRoleRelaExample.createCriteria();
+		baseUserRoleRelaCriteria.andUserIdEqualTo(user.getUserId());
+		List<BaseUserRoleRela> baseUserRoleRelaList = baseUserRoleRelaMapper.selectByExample(baseUserRoleRelaExample);
+		List<BaseRole> roleList = new ArrayList<>();
+		if(!baseUserRoleRelaList.isEmpty()){
+			for(BaseUserRoleRela record:baseUserRoleRelaList){
+				BaseRole role = baseRoleMapper.selectByPrimaryKey(record.getRoleId());
+				if(role != null){
+					roleList.add(role);
+				}
+			}
+		}
+		user.setUserPwd(null);
+		LoginResultBO loginResultBO = new LoginResultBO();
+		loginResultBO.setBaseUser(user);
+		loginResultBO.setRoleList(roleList);
+		//机构，部门
+		loginResultBO.setBaseDept(baseDeptMapper.selectByPrimaryKey(user.getDeptId()));
+		loginResultBO.setBaseOrg(baseOrgMapper.selectByPrimaryKey(user.getOrgId()));
+		user.setLastLoginTime(new Timestamp(DateTime.now().getMillis()));
+		baseUserMapper.updateByPrimaryKeySelective(user);
+		return loginResultBO;
 	}
 
 	public boolean isInitFlag() {

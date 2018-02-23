@@ -9,7 +9,7 @@ import com.n22.cs.comp.common.model.StatusCode;
 /**
  * 自定义异常
  * 
- * @author jackphang
+ * @author xxx
  * @date 2016年4月18日 上午11:02:56
  * @version 1.0
  */
@@ -52,7 +52,7 @@ public class N22CoreException extends Exception {
 	/**
 	 * 返回错误信息及错误码[JSON]
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月18日 上午11:08:23
 	 */
 	public String respMsg() {

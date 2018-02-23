@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 /**
  * 日志 工具
- * @author	jackphang
+ * @author	xxx
  * @date	2016年6月12日 上午9:44:30 
  * @version 1.0
  */

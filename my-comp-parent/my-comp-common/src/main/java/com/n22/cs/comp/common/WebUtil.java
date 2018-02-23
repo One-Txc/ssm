@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * WebUtil工具
  * 
- * @author jackphang
+ * @author xxx
  * @date 2016年4月15日 下午4:48:12
  * @version 1.0
  */
@@ -14,7 +14,7 @@ public class WebUtil {
 	/**
 	 * 判断ajax请求
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月15日 下午4:48:29
 	 */
 	public static boolean isAjax(HttpServletRequest request) {

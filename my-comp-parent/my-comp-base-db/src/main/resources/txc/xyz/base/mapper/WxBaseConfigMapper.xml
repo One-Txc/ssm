@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="txc.xyz.base.mapper.WxBaseConfigMapper">
+	<resultMap id="BaseResultMap" type="txc.xyz.base.model.WxBaseConfig">
+		<id column="sys_id" jdbcType="BIGINT" property="sysId" />
+		<result column="sys_name" jdbcType="VARCHAR" property="sysName" />
+		<result column="app_id" jdbcType="VARCHAR" property="appId" />
+		<result column="app_secret" jdbcType="VARCHAR" property="appSecret" />
+		<result column="original_id" jdbcType="VARCHAR" property="originalId" />
+		<result column="merchant_no" jdbcType="VARCHAR" property="merchantNo" />
+		<result column="merchant_key" jdbcType="VARCHAR" property="merchantKey" />
+		<result column="callback_url" jdbcType="VARCHAR" property="callbackUrl" />
+		<result column="qrcode_url" jdbcType="VARCHAR" property="qrcodeUrl" />
+		<result column="service_mobile" jdbcType="VARCHAR" property="serviceMobile" />
+		<result column="wx_type" jdbcType="VARCHAR" property="wxType" />
+		<result column="valid_flag" jdbcType="CHAR" property="validFlag" />
+		<result column="service_status" jdbcType="CHAR" property="serviceStatus" />
+		<result column="token" jdbcType="VARCHAR" property="token" />
+		<result column="validate_pay_money" jdbcType="CHAR" property="validatePayMoney" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		sys_id, sys_name, app_id, app_secret, original_id, merchant_no, merchant_key, callback_url, 
+		qrcode_url, service_mobile, wx_type, valid_flag, service_status, token, validate_pay_money, 
+		create_time, update_time
+	</sql>
+	<select id="selectByExample" parameterType="txc.xyz.base.model.WxBaseConfigExample" resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'false' as QUERYID,
+		<include refid="Base_Column_List" />
+		from wx_base_config
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from wx_base_config
+		where sys_id = #{sysId,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from wx_base_config
+		where sys_id = #{sysId,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="txc.xyz.base.model.WxBaseConfigExample">
+		delete from wx_base_config
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="txc.xyz.base.model.WxBaseConfig">
+		insert into wx_base_config (sys_id, sys_name, app_id, 
+			app_secret, original_id, merchant_no, 
+			merchant_key, callback_url, qrcode_url, 
+			service_mobile, wx_type, valid_flag, 
+			service_status, token, validate_pay_money, 
+			create_time, update_time)
+		values (#{sysId,jdbcType=BIGINT}, #{sysName,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, 
+			#{appSecret,jdbcType=VARCHAR}, #{originalId,jdbcType=VARCHAR}, #{merchantNo,jdbcType=VARCHAR}, 
+			#{merchantKey,jdbcType=VARCHAR}, #{callbackUrl,jdbcType=VARCHAR}, #{qrcodeUrl,jdbcType=VARCHAR}, 
+			#{serviceMobile,jdbcType=VARCHAR}, #{wxType,jdbcType=VARCHAR}, #{validFlag,jdbcType=CHAR}, 
+			#{serviceStatus,jdbcType=CHAR}, #{token,jdbcType=VARCHAR}, #{validatePayMoney,jdbcType=CHAR}, 
+			#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="txc.xyz.base.model.WxBaseConfig">
+		insert into wx_base_config
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sysId != null">
+				sys_id,
+			</if>
+			<if test="sysName != null">
+				sys_name,
+			</if>
+			<if test="appId != null">
+				app_id,
+			</if>
+			<if test="appSecret != null">
+				app_secret,
+			</if>
+			<if test="originalId != null">
+				original_id,
+			</if>
+			<if test="merchantNo != null">
+				merchant_no,
+			</if>
+			<if test="merchantKey != null">
+				merchant_key,
+			</if>
+			<if test="callbackUrl != null">
+				callback_url,
+			</if>
+			<if test="qrcodeUrl != null">
+				qrcode_url,
+			</if>
+			<if test="serviceMobile != null">
+				service_mobile,
+			</if>
+			<if test="wxType != null">
+				wx_type,
+			</if>
+			<if test="validFlag != null">
+				valid_flag,
+			</if>
+			<if test="serviceStatus != null">
+				service_status,
+			</if>
+			<if test="token != null">
+				token,
+			</if>
+			<if test="validatePayMoney != null">
+				validate_pay_money,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sysId != null">
+				#{sysId,jdbcType=BIGINT},
+			</if>
+			<if test="sysName != null">
+				#{sysName,jdbcType=VARCHAR},
+			</if>
+			<if test="appId != null">
+				#{appId,jdbcType=VARCHAR},
+			</if>
+			<if test="appSecret != null">
+				#{appSecret,jdbcType=VARCHAR},
+			</if>
+			<if test="originalId != null">
+				#{originalId,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantNo != null">
+				#{merchantNo,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantKey != null">
+				#{merchantKey,jdbcType=VARCHAR},
+			</if>
+			<if test="callbackUrl != null">
+				#{callbackUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="qrcodeUrl != null">
+				#{qrcodeUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceMobile != null">
+				#{serviceMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="wxType != null">
+				#{wxType,jdbcType=VARCHAR},
+			</if>
+			<if test="validFlag != null">
+				#{validFlag,jdbcType=CHAR},
+			</if>
+			<if test="serviceStatus != null">
+				#{serviceStatus,jdbcType=CHAR},
+			</if>
+			<if test="token != null">
+				#{token,jdbcType=VARCHAR},
+			</if>
+			<if test="validatePayMoney != null">
+				#{validatePayMoney,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByExampleSelective" parameterType="map">
+		update wx_base_config
+		<set>
+			<if test="record.sysId != null">
+				sys_id = #{record.sysId,jdbcType=BIGINT},
+			</if>
+			<if test="record.sysName != null">
+				sys_name = #{record.sysName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.appId != null">
+				app_id = #{record.appId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.appSecret != null">
+				app_secret = #{record.appSecret,jdbcType=VARCHAR},
+			</if>
+			<if test="record.originalId != null">
+				original_id = #{record.originalId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.merchantNo != null">
+				merchant_no = #{record.merchantNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.merchantKey != null">
+				merchant_key = #{record.merchantKey,jdbcType=VARCHAR},
+			</if>
+			<if test="record.callbackUrl != null">
+				callback_url = #{record.callbackUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.qrcodeUrl != null">
+				qrcode_url = #{record.qrcodeUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="record.serviceMobile != null">
+				service_mobile = #{record.serviceMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="record.wxType != null">
+				wx_type = #{record.wxType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.validFlag != null">
+				valid_flag = #{record.validFlag,jdbcType=CHAR},
+			</if>
+			<if test="record.serviceStatus != null">
+				service_status = #{record.serviceStatus,jdbcType=CHAR},
+			</if>
+			<if test="record.token != null">
+				token = #{record.token,jdbcType=VARCHAR},
+			</if>
+			<if test="record.validatePayMoney != null">
+				validate_pay_money = #{record.validatePayMoney,jdbcType=CHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update wx_base_config
+		set sys_id = #{record.sysId,jdbcType=BIGINT},
+			sys_name = #{record.sysName,jdbcType=VARCHAR},
+			app_id = #{record.appId,jdbcType=VARCHAR},
+			app_secret = #{record.appSecret,jdbcType=VARCHAR},
+			original_id = #{record.originalId,jdbcType=VARCHAR},
+			merchant_no = #{record.merchantNo,jdbcType=VARCHAR},
+			merchant_key = #{record.merchantKey,jdbcType=VARCHAR},
+			callback_url = #{record.callbackUrl,jdbcType=VARCHAR},
+			qrcode_url = #{record.qrcodeUrl,jdbcType=VARCHAR},
+			service_mobile = #{record.serviceMobile,jdbcType=VARCHAR},
+			wx_type = #{record.wxType,jdbcType=VARCHAR},
+			valid_flag = #{record.validFlag,jdbcType=CHAR},
+			service_status = #{record.serviceStatus,jdbcType=CHAR},
+			token = #{record.token,jdbcType=VARCHAR},
+			validate_pay_money = #{record.validatePayMoney,jdbcType=CHAR},
+			create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="txc.xyz.base.model.WxBaseConfig">
+		update wx_base_config
+		<set>
+			<if test="sysName != null">
+				sys_name = #{sysName,jdbcType=VARCHAR},
+			</if>
+			<if test="appId != null">
+				app_id = #{appId,jdbcType=VARCHAR},
+			</if>
+			<if test="appSecret != null">
+				app_secret = #{appSecret,jdbcType=VARCHAR},
+			</if>
+			<if test="originalId != null">
+				original_id = #{originalId,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantNo != null">
+				merchant_no = #{merchantNo,jdbcType=VARCHAR},
+			</if>
+			<if test="merchantKey != null">
+				merchant_key = #{merchantKey,jdbcType=VARCHAR},
+			</if>
+			<if test="callbackUrl != null">
+				callback_url = #{callbackUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="qrcodeUrl != null">
+				qrcode_url = #{qrcodeUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="serviceMobile != null">
+				service_mobile = #{serviceMobile,jdbcType=VARCHAR},
+			</if>
+			<if test="wxType != null">
+				wx_type = #{wxType,jdbcType=VARCHAR},
+			</if>
+			<if test="validFlag != null">
+				valid_flag = #{validFlag,jdbcType=CHAR},
+			</if>
+			<if test="serviceStatus != null">
+				service_status = #{serviceStatus,jdbcType=CHAR},
+			</if>
+			<if test="token != null">
+				token = #{token,jdbcType=VARCHAR},
+			</if>
+			<if test="validatePayMoney != null">
+				validate_pay_money = #{validatePayMoney,jdbcType=CHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where sys_id = #{sysId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="txc.xyz.base.model.WxBaseConfig">
+		update wx_base_config
+		set sys_name = #{sysName,jdbcType=VARCHAR},
+			app_id = #{appId,jdbcType=VARCHAR},
+			app_secret = #{appSecret,jdbcType=VARCHAR},
+			original_id = #{originalId,jdbcType=VARCHAR},
+			merchant_no = #{merchantNo,jdbcType=VARCHAR},
+			merchant_key = #{merchantKey,jdbcType=VARCHAR},
+			callback_url = #{callbackUrl,jdbcType=VARCHAR},
+			qrcode_url = #{qrcodeUrl,jdbcType=VARCHAR},
+			service_mobile = #{serviceMobile,jdbcType=VARCHAR},
+			wx_type = #{wxType,jdbcType=VARCHAR},
+			valid_flag = #{validFlag,jdbcType=CHAR},
+			service_status = #{serviceStatus,jdbcType=CHAR},
+			token = #{token,jdbcType=VARCHAR},
+			validate_pay_money = #{validatePayMoney,jdbcType=CHAR},
+			create_time = #{createTime,jdbcType=TIMESTAMP},
+			update_time = #{updateTime,jdbcType=TIMESTAMP}
+		where sys_id = #{sysId,jdbcType=BIGINT}
+	</update>
+</mapper>

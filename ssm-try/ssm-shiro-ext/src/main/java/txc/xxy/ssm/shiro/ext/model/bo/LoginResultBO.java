@@ -3,10 +3,11 @@ package txc.xxy.ssm.shiro.ext.model.bo;
 import java.io.Serializable;
 import java.util.List;
 
-import txc.xxy.ssm.model.BaseDept;
-import txc.xxy.ssm.model.BaseRole;
-import txc.xxy.ssm.model.BaseUser;
-import txc.xxy.ssm.model.ext.BaseOrgExt;
+import txc.xyz.base.model.BaseDept;
+import txc.xyz.base.model.BaseOrg;
+import txc.xyz.base.model.BaseRole;
+import txc.xyz.base.model.BaseUser;
+import txc.xyz.base.model.cust.BaseOrgExt;
 
 
 /**
@@ -25,7 +26,9 @@ public class LoginResultBO implements Serializable {
 	private List<BaseRole> roleList;
 
 	private BaseDept baseDept;// 部门
-	private BaseOrgExt baseOrgExt;// 机构
+
+	private BaseOrg baseOrg;// 机构
+
 
 	public BaseUser getBaseUser() {
 		return baseUser;
@@ -51,12 +54,11 @@ public class LoginResultBO implements Serializable {
 		this.baseDept = baseDept;
 	}
 
-	public BaseOrgExt getBaseOrgExt() {
-		return baseOrgExt;
+	public BaseOrg getBaseOrg() {
+		return baseOrg;
 	}
 
-	public void setBaseOrgExt(BaseOrgExt baseOrgExt) {
-		this.baseOrgExt = baseOrgExt;
+	public void setBaseOrg(BaseOrg baseOrg) {
+		this.baseOrg = baseOrg;
 	}
-
 }

@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 解析xml数据
  * 
- * @author jackphang
+ * @author xxx
  * @date 2016年6月17日 上午8:40:16
  * @version 1.0
  */
@@ -32,7 +32,7 @@ public class XmlUtil {
 	/**
 	 * 解析xml,返回第一级元素键值对。如果第一级元素有子节点，则此节点的值是子节点的xml数据。
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年6月17日 上午8:40:13
 	 */
 	@SuppressWarnings("unchecked")
@@ -79,7 +79,7 @@ public class XmlUtil {
 
 	/***
 	 * @desc: 解析xml->bean
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月10日 上午9:48:40
 	 * @param xmlStr
 	 * @param type
@@ -148,7 +148,7 @@ public class XmlUtil {
 	/**
 	 * 获取子结点的xml
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年6月17日 上午8:41:47
 	 */
 	@SuppressWarnings("unchecked")
@@ -179,7 +179,7 @@ public class XmlUtil {
 
 	/**
 	 * @desc: map转化成xml
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月8日 下午7:44:06
 	 * @param packageParams
 	 * @return

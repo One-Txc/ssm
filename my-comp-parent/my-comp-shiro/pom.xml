@@ -21,6 +21,10 @@
 			<artifactId>my-comp-common</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>txc.xxy</groupId>
+			<artifactId>my-comp-redis</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity-tools</artifactId>
 		</dependency>
@@ -58,5 +62,9 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>txc.xxy</groupId>
+            <artifactId>my-comp-base-db</artifactId>
+        </dependency>
+    </dependencies>
 </project>

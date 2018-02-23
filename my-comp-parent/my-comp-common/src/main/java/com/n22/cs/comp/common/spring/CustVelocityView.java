@@ -30,7 +30,7 @@ import com.n22.cs.comp.common.log.LogTool;
  * 
  * @description 实现通过request uri 自动加载layout，并实现layout中可以个性化设置如title，script等信息
  *              layout配置文件见layout.xml，将layout.xml放置在classpath下
- * @author jackphang
+ * @author xxx
  * @date 2016年3月28日 上午9:51:59
  */
 public class CustVelocityView extends VelocityToolboxView implements BeanFactoryAware {

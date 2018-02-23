@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContextAware;
 /**
  * 该类用于其它非spring容器管理的类时取spring容器中的bean
  * 
- * @author jackphang
+ * @author xxx
  * @date 2016年5月2日 下午1:00:17
  * @version 1.0
  */

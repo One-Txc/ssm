@@ -6,4 +6,10 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>ssm-model</artifactId>
+  <dependencies>
+    <dependency>
+      <groupId>txc.xxy</groupId>
+      <artifactId>my-comp-base-db</artifactId>
+    </dependency>
+  </dependencies>
 </project>

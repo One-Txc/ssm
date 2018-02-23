@@ -24,7 +24,7 @@ import com.n22.cs.comp.common.model.ResultData;
 /**
  * 自定义角色鉴权过滤器,扩展异步请求认证提示功能;
  * 
- * @author jackphang
+ * @author xxx
  * @date 2016年4月15日 下午4:41:52
  * @version 1.0
  */
@@ -38,8 +38,9 @@ public class CustRolesAuthorizationFilter extends RolesAuthorizationFilter {
 			throws IOException {
 		// 默认使用的是 hasAllRoles
 		final Subject subject = getSubject(request, response);
-		final String[] rolesArray = (String[]) mappedValue;
 
+		//获取该路径需要的权限（角色id）
+		final String[] rolesArray = (String[]) mappedValue;
 		if (rolesArray == null || rolesArray.length == 0) {
 			// no roles specified, so nothing to check - allow access.
 			return true;
@@ -56,7 +57,7 @@ public class CustRolesAuthorizationFilter extends RolesAuthorizationFilter {
 	/**
 	 * 访问被禁止时,扩展异步请求认证提示功能
 	 * 
-	 * @author : jackphang
+	 * @author : xxx
 	 * @date :2016年4月15日 下午4:42:43
 	 */
 	@Override

@@ -10,6 +10,11 @@
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
+
+
+	<context:property-placeholder
+			ignore-unresolvable="true" location="classpath*:ssm-try-config.properties" />
+
 	<!-- 配置 Shiro 的 SecurityManager Bean. -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- 开启shiro session -->
@@ -79,6 +84,7 @@
           depends-on="lifecycleBeanPostProcessor"/>
 	
 	<bean id="custRolesAuthorizationFilter" class="com.n22.cs.comp.shiro.CustRolesAuthorizationFilter" />
+	<bean id="roleTypeAuthorizationFilter" class="com.n22.cs.comp.shiro.authorzationfilter.RoleTypeAuthorizationFilter" />
 
 	<!-- 配置 ShiroFilter bean: 该 bean 的 id 必须和 web.xml 文件中配置的 shiro filter 的 
 		name 一致 -->
@@ -91,6 +97,9 @@
 			<map>
 				<entry key="roles">
 					 <ref bean="custRolesAuthorizationFilter"/>
+				</entry>
+				<entry key="roleTypes">
+					<ref bean="roleTypeAuthorizationFilter"/>
 				</entry>
 			</map>
 		</property>

@@ -17,7 +17,7 @@ import redis.clients.jedis.JedisPubSub;
 /**
  * 
  * @description Redis 单机版
- * @author jackphang
+ * @author xxx
  * @date 2016年3月27日 下午6:24:10
  */
 public class JedisClientSingle implements JedisClient {

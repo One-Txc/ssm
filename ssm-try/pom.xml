@@ -10,8 +10,6 @@
 		<module>ssm-web</module>
 		<module>ssm-model</module>
 		<module>ssm-mapper</module>
-		<module>ssm-mapper-ext</module>
-		<module>ssm-model-ext</module>
 		<module>ssm-common</module>
 		<module>ssm-biz</module>
 		<module>ssm-shiro-ext</module>
@@ -64,6 +62,11 @@
 			<dependency>
 				<groupId>txc.xxy</groupId>
 				<artifactId>my-comp-shiro</artifactId>
+				<version>${comp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>my-comp-base-db</artifactId>
 				<version>${comp.version}</version>
 			</dependency>
 

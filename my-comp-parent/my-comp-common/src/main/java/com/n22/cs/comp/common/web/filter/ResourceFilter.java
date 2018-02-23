@@ -24,7 +24,7 @@ import com.n22.cs.comp.common.ServletPathMatcher;
 /**
  * @desc 配置 resource filter
  * @remark 用于访问 class 下的资源文件
- * @author jackphang
+ * @author xxx
  * @date 2016年10月29日 上午11:11:25
  */
 public abstract class ResourceFilter implements Filter {
@@ -173,7 +173,7 @@ public abstract class ResourceFilter implements Filter {
 
 	/**
 	 * @desc: 获取目标 类加载下的资源文件
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年12月1日 上午9:22:31
 	 * @param resourcePath
 	 * @return
@@ -183,7 +183,7 @@ public abstract class ResourceFilter implements Filter {
 
 	/**
 	 * @desc: 登录
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月29日 下午12:47:54
 	 * @param req
 	 * @param resp

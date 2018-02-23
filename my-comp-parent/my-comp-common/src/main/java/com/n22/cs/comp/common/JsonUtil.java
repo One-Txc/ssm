@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSON;
 /**
  * 
  * @description Json格式化工具
- * @author jackphang
+ * @author xxx
  * @date 2016年3月27日 下午4:26:18
  */
 public class JsonUtil {

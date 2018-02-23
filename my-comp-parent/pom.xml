@@ -10,21 +10,61 @@
 		<module>my-comp-redis</module>
 		<module>my-comp-common</module>
 		<module>my-comp-shiro</module>
-	</modules>
+        <module>my-comp-base-db</module>
+    </modules>
+
+
+	<properties>
+		<project.name>demand</project.name>
+		<junit.version>4.12</junit.version>
+		<spring.version>4.1.3.RELEASE</spring.version>
+		<mybatis.version>3.2.8</mybatis.version>
+		<mybatis.spring.version>1.2.2</mybatis.spring.version>
+		<mybatis.paginator.version>1.2.16</mybatis.paginator.version>
+		<pagehelper.version>4.1.1</pagehelper.version>
+		<mysql.version>5.1.37</mysql.version>
+		<slf4j.version>1.6.4</slf4j.version>
+		<jackson.version>2.4.2</jackson.version>
+		<druid.version>1.0.9</druid.version>
+		<jstl.version>1.2</jstl.version>
+		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+		<joda-time.version>2.9.1</joda-time.version>
+		<commons-lang3.version>3.5</commons-lang3.version>
+		<maven.autoconfig.version>1.2</maven.autoconfig.version>
+		<jedis.version>2.8.1</jedis.version>
+		<kaptcha.version>2.3.2</kaptcha.version>
+		<velocity.version>1.7</velocity.version>
+		<velocity-tools.version>2.0</velocity-tools.version>
+		<comp.version>0.0.1-SNAPSHOT</comp.version>
+		<shiro.version>1.2.4</shiro.version>
+		<shiro-redis.version>2.4.2.1-RELEASE</shiro-redis.version>
+		<velocity-tools.version>2.0</velocity-tools.version>
+		<spring-boot.version>1.4.3.RELEASE</spring-boot.version>
+		<hibernate-validator.version>4.3.2.Final</hibernate-validator.version>
+	</properties>
 
 
 	<dependencyManagement>
-
 		<dependencies>
 			<dependency>
 				<groupId>txc.xxy</groupId>
 				<artifactId>my-comp-common</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>${comp.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>txc.xxy</groupId>
 				<artifactId>my-comp-redis</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>${comp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>my-comp-base-db</artifactId>
+				<version>${comp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>txc.xxy</groupId>
+				<artifactId>my-comp-shiro</artifactId>
+				<version>${comp.version}</version>
 			</dependency>
 
 			<!-- velocity -->
@@ -49,6 +89,13 @@
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
 				<version>2.4</version>
+			</dependency>
+
+			<!-- Mybatis -->
+			<dependency>
+				<groupId>org.mybatis</groupId>
+				<artifactId>mybatis</artifactId>
+				<version>${mybatis.version}</version>
 			</dependency>
 
 		</dependencies>

@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
-     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
-     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<!-- id="realm"不可更改 继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的CustRealm.java -->
 	<bean id="realm"
@@ -25,20 +19,20 @@
 
 	<!-- 此 服务类由各自系统自行继承AbstractFilterChainDefinitionsService 进行扩展 -->
 	<bean id="filterChainDefinitionsService"
-		class="txc.xxy.ssm.shiro.ext.authc.UserFilterChainDefinitionsService">
-		<property name="jedisClient" ref="jedisClient" />
-		<property name="custRolesAuthorizationFilter" ref="custRolesAuthorizationFilter"/>
+		class="com.n22.cs.comp.shiro.DefualtFilterChainDefinitionsService">
+		<!--<property name="jedisClient" ref="jedisClient" />-->
+		<!--<property name="custRolesAuthorizationFilter" ref="custRolesAuthorizationFilter"/>-->
 		<!-- 拦截的URL及校验规则 -->
 		<property name="definitions">
 			<value>
 				<!-- 系统会优先使用先匹配到的权限 -->
-				/r/html/student.htm = roles[student]
-				/js/** = anon
+
+				/r/html/student.htm = roleTypes[student,admin]
+				/r/html/teacher.htm = roleTypes[teacher,admin]
+				/r/html/admin.htm = roleTypes[admin]
+				/r/html/all.htm = roles[login]
 				/r/html/** = roles[login]
 				/** = anon
-				<!-- /r/bug/**=roles[login]
-				/basedict/**=roles[login,admin]
-				/demand/** =roles[login] -->				
 			</value>
 		</property>
 	</bean>

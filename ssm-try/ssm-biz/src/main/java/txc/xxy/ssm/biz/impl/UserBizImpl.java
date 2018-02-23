@@ -12,8 +12,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import txc.xxy.ssm.biz.UserBiz;
-import txc.xxy.ssm.mapper.BaseUserMapper;
-import txc.xxy.ssm.model.BaseUser;
+import txc.xyz.base.mapper.BaseUserMapper;
+import txc.xyz.base.model.BaseUser;
 
 /**
   *

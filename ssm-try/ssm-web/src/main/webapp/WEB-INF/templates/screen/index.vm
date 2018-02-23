@@ -4,5 +4,13 @@
 </head>
 <body>
 	<h1>首页</h1>
+
+	<a href="html/admin.htm">管理员页面</a><br>
+	<a href="html/teacher.htm">老师页面</a><br>
+	<a href="html/student.htm">学生页面</a><br>
+	<a href="html/all.htm">all页面</a><br>
+    <a href="exception.htm">异常页面</a><br>
+    <a href="success.htm">成功页面</a><br>
+    <a href="unauthorized.htm">无权限页面</a><br>
 </body>
 </html>

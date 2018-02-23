@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 状态码
  * 
- * @author jackphang
+ * @author xxx
  * @date 2016年4月15日 上午11:14:36
  * @version 1.0
  */

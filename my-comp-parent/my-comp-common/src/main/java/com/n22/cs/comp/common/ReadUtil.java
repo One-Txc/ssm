@@ -15,7 +15,7 @@ import com.n22.cs.comp.common.log.LogTool;
 /**
  * @desc 用于读取资源文件
  * @note resource 均指class下的路径
- * @author jackphang
+ * @author xxx
  * @date 2016年10月29日 下午1:08:38
  */
 public class ReadUtil {
@@ -34,7 +34,7 @@ public class ReadUtil {
 
 	/**
 	 * @desc:读取资源文件
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月29日 下午1:09:06
 	 * @param 类加载路径
 	 *            调用者获取方式 Thread.currentThread().getContextClassLoader()
@@ -65,7 +65,7 @@ public class ReadUtil {
 
 	/**
 	 * @desc:读取资源文件
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月29日 下午1:09:06
 	 * @param 类加载路径
 	 *            调用者获取方式 Thread.currentThread().getContextClassLoader()

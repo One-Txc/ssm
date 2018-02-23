@@ -12,7 +12,7 @@ import com.n22.cs.comp.common.log.LogTool;
 
 /**
  * @desc 往System中注入属性
- * @author jackphang
+ * @author xxx
  * @date 2016年12月26日 下午2:08:13
  */
 public class SystemPropertyListner implements ServletContextListener {

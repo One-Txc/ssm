@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="txc.xyz.base.mapper.ComBasicMapper">
+	<resultMap id="BaseResultMap" type="txc.xyz.base.model.ComBasic">
+		<id column="com_id" jdbcType="VARCHAR" property="comId" />
+		<result column="com_name" jdbcType="VARCHAR" property="comName" />
+		<result column="abbr_name" jdbcType="VARCHAR" property="abbrName" />
+		<result column="addr_code" jdbcType="VARCHAR" property="addrCode" />
+		<result column="addr_code_chn" jdbcType="VARCHAR" property="addrCodeChn" />
+		<result column="addr_info" jdbcType="VARCHAR" property="addrInfo" />
+		<result column="contact_person" jdbcType="VARCHAR" property="contactPerson" />
+		<result column="tel" jdbcType="VARCHAR" property="tel" />
+		<result column="phone_no" jdbcType="VARCHAR" property="phoneNo" />
+		<result column="fax" jdbcType="VARCHAR" property="fax" />
+		<result column="bank_name" jdbcType="VARCHAR" property="bankName" />
+		<result column="bank_account" jdbcType="VARCHAR" property="bankAccount" />
+		<result column="tax_number" jdbcType="VARCHAR" property="taxNumber" />
+		<result column="subject_id" jdbcType="VARCHAR" property="subjectId" />
+		<result column="subject_type" jdbcType="VARCHAR" property="subjectType" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+		<result column="gps_x" jdbcType="VARCHAR" property="gpsX" />
+		<result column="gps_y" jdbcType="VARCHAR" property="gpsY" />
+		<result column="gps_addr" jdbcType="VARCHAR" property="gpsAddr" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		com_id, com_name, abbr_name, addr_code, addr_code_chn, addr_info, contact_person, 
+		tel, phone_no, fax, bank_name, bank_account, tax_number, subject_id, subject_type, 
+		create_time, update_time, gps_x, gps_y, gps_addr
+	</sql>
+	<select id="selectByExample" parameterType="txc.xyz.base.model.ComBasicExample" resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'false' as QUERYID,
+		<include refid="Base_Column_List" />
+		from com_basic
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from com_basic
+		where com_id = #{comId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from com_basic
+		where com_id = #{comId,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="txc.xyz.base.model.ComBasicExample">
+		delete from com_basic
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="txc.xyz.base.model.ComBasic">
+		insert into com_basic (com_id, com_name, abbr_name, 
+			addr_code, addr_code_chn, addr_info, 
+			contact_person, tel, phone_no, 
+			fax, bank_name, bank_account, 
+			tax_number, subject_id, subject_type, 
+			create_time, update_time, gps_x, 
+			gps_y, gps_addr)
+		values (#{comId,jdbcType=VARCHAR}, #{comName,jdbcType=VARCHAR}, #{abbrName,jdbcType=VARCHAR}, 
+			#{addrCode,jdbcType=VARCHAR}, #{addrCodeChn,jdbcType=VARCHAR}, #{addrInfo,jdbcType=VARCHAR}, 
+			#{contactPerson,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, 
+			#{fax,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR}, 
+			#{taxNumber,jdbcType=VARCHAR}, #{subjectId,jdbcType=VARCHAR}, #{subjectType,jdbcType=VARCHAR}, 
+			#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{gpsX,jdbcType=VARCHAR}, 
+			#{gpsY,jdbcType=VARCHAR}, #{gpsAddr,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="txc.xyz.base.model.ComBasic">
+		insert into com_basic
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="comId != null">
+				com_id,
+			</if>
+			<if test="comName != null">
+				com_name,
+			</if>
+			<if test="abbrName != null">
+				abbr_name,
+			</if>
+			<if test="addrCode != null">
+				addr_code,
+			</if>
+			<if test="addrCodeChn != null">
+				addr_code_chn,
+			</if>
+			<if test="addrInfo != null">
+				addr_info,
+			</if>
+			<if test="contactPerson != null">
+				contact_person,
+			</if>
+			<if test="tel != null">
+				tel,
+			</if>
+			<if test="phoneNo != null">
+				phone_no,
+			</if>
+			<if test="fax != null">
+				fax,
+			</if>
+			<if test="bankName != null">
+				bank_name,
+			</if>
+			<if test="bankAccount != null">
+				bank_account,
+			</if>
+			<if test="taxNumber != null">
+				tax_number,
+			</if>
+			<if test="subjectId != null">
+				subject_id,
+			</if>
+			<if test="subjectType != null">
+				subject_type,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="gpsX != null">
+				gps_x,
+			</if>
+			<if test="gpsY != null">
+				gps_y,
+			</if>
+			<if test="gpsAddr != null">
+				gps_addr,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="comId != null">
+				#{comId,jdbcType=VARCHAR},
+			</if>
+			<if test="comName != null">
+				#{comName,jdbcType=VARCHAR},
+			</if>
+			<if test="abbrName != null">
+				#{abbrName,jdbcType=VARCHAR},
+			</if>
+			<if test="addrCode != null">
+				#{addrCode,jdbcType=VARCHAR},
+			</if>
+			<if test="addrCodeChn != null">
+				#{addrCodeChn,jdbcType=VARCHAR},
+			</if>
+			<if test="addrInfo != null">
+				#{addrInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPerson != null">
+				#{contactPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				#{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneNo != null">
+				#{phoneNo,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				#{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="bankName != null">
+				#{bankName,jdbcType=VARCHAR},
+			</if>
+			<if test="bankAccount != null">
+				#{bankAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="taxNumber != null">
+				#{taxNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectId != null">
+				#{subjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectType != null">
+				#{subjectType,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gpsX != null">
+				#{gpsX,jdbcType=VARCHAR},
+			</if>
+			<if test="gpsY != null">
+				#{gpsY,jdbcType=VARCHAR},
+			</if>
+			<if test="gpsAddr != null">
+				#{gpsAddr,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByExampleSelective" parameterType="map">
+		update com_basic
+		<set>
+			<if test="record.comId != null">
+				com_id = #{record.comId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.comName != null">
+				com_name = #{record.comName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.abbrName != null">
+				abbr_name = #{record.abbrName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.addrCode != null">
+				addr_code = #{record.addrCode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.addrCodeChn != null">
+				addr_code_chn = #{record.addrCodeChn,jdbcType=VARCHAR},
+			</if>
+			<if test="record.addrInfo != null">
+				addr_info = #{record.addrInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.contactPerson != null">
+				contact_person = #{record.contactPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="record.tel != null">
+				tel = #{record.tel,jdbcType=VARCHAR},
+			</if>
+			<if test="record.phoneNo != null">
+				phone_no = #{record.phoneNo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fax != null">
+				fax = #{record.fax,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bankName != null">
+				bank_name = #{record.bankName,jdbcType=VARCHAR},
+			</if>
+			<if test="record.bankAccount != null">
+				bank_account = #{record.bankAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="record.taxNumber != null">
+				tax_number = #{record.taxNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="record.subjectId != null">
+				subject_id = #{record.subjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.subjectType != null">
+				subject_type = #{record.subjectType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createTime != null">
+				create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.updateTime != null">
+				update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.gpsX != null">
+				gps_x = #{record.gpsX,jdbcType=VARCHAR},
+			</if>
+			<if test="record.gpsY != null">
+				gps_y = #{record.gpsY,jdbcType=VARCHAR},
+			</if>
+			<if test="record.gpsAddr != null">
+				gps_addr = #{record.gpsAddr,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update com_basic
+		set com_id = #{record.comId,jdbcType=VARCHAR},
+			com_name = #{record.comName,jdbcType=VARCHAR},
+			abbr_name = #{record.abbrName,jdbcType=VARCHAR},
+			addr_code = #{record.addrCode,jdbcType=VARCHAR},
+			addr_code_chn = #{record.addrCodeChn,jdbcType=VARCHAR},
+			addr_info = #{record.addrInfo,jdbcType=VARCHAR},
+			contact_person = #{record.contactPerson,jdbcType=VARCHAR},
+			tel = #{record.tel,jdbcType=VARCHAR},
+			phone_no = #{record.phoneNo,jdbcType=VARCHAR},
+			fax = #{record.fax,jdbcType=VARCHAR},
+			bank_name = #{record.bankName,jdbcType=VARCHAR},
+			bank_account = #{record.bankAccount,jdbcType=VARCHAR},
+			tax_number = #{record.taxNumber,jdbcType=VARCHAR},
+			subject_id = #{record.subjectId,jdbcType=VARCHAR},
+			subject_type = #{record.subjectType,jdbcType=VARCHAR},
+			create_time = #{record.createTime,jdbcType=TIMESTAMP},
+			update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+			gps_x = #{record.gpsX,jdbcType=VARCHAR},
+			gps_y = #{record.gpsY,jdbcType=VARCHAR},
+			gps_addr = #{record.gpsAddr,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="txc.xyz.base.model.ComBasic">
+		update com_basic
+		<set>
+			<if test="comName != null">
+				com_name = #{comName,jdbcType=VARCHAR},
+			</if>
+			<if test="abbrName != null">
+				abbr_name = #{abbrName,jdbcType=VARCHAR},
+			</if>
+			<if test="addrCode != null">
+				addr_code = #{addrCode,jdbcType=VARCHAR},
+			</if>
+			<if test="addrCodeChn != null">
+				addr_code_chn = #{addrCodeChn,jdbcType=VARCHAR},
+			</if>
+			<if test="addrInfo != null">
+				addr_info = #{addrInfo,jdbcType=VARCHAR},
+			</if>
+			<if test="contactPerson != null">
+				contact_person = #{contactPerson,jdbcType=VARCHAR},
+			</if>
+			<if test="tel != null">
+				tel = #{tel,jdbcType=VARCHAR},
+			</if>
+			<if test="phoneNo != null">
+				phone_no = #{phoneNo,jdbcType=VARCHAR},
+			</if>
+			<if test="fax != null">
+				fax = #{fax,jdbcType=VARCHAR},
+			</if>
+			<if test="bankName != null">
+				bank_name = #{bankName,jdbcType=VARCHAR},
+			</if>
+			<if test="bankAccount != null">
+				bank_account = #{bankAccount,jdbcType=VARCHAR},
+			</if>
+			<if test="taxNumber != null">
+				tax_number = #{taxNumber,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectId != null">
+				subject_id = #{subjectId,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectType != null">
+				subject_type = #{subjectType,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="gpsX != null">
+				gps_x = #{gpsX,jdbcType=VARCHAR},
+			</if>
+			<if test="gpsY != null">
+				gps_y = #{gpsY,jdbcType=VARCHAR},
+			</if>
+			<if test="gpsAddr != null">
+				gps_addr = #{gpsAddr,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where com_id = #{comId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="txc.xyz.base.model.ComBasic">
+		update com_basic
+		set com_name = #{comName,jdbcType=VARCHAR},
+			abbr_name = #{abbrName,jdbcType=VARCHAR},
+			addr_code = #{addrCode,jdbcType=VARCHAR},
+			addr_code_chn = #{addrCodeChn,jdbcType=VARCHAR},
+			addr_info = #{addrInfo,jdbcType=VARCHAR},
+			contact_person = #{contactPerson,jdbcType=VARCHAR},
+			tel = #{tel,jdbcType=VARCHAR},
+			phone_no = #{phoneNo,jdbcType=VARCHAR},
+			fax = #{fax,jdbcType=VARCHAR},
+			bank_name = #{bankName,jdbcType=VARCHAR},
+			bank_account = #{bankAccount,jdbcType=VARCHAR},
+			tax_number = #{taxNumber,jdbcType=VARCHAR},
+			subject_id = #{subjectId,jdbcType=VARCHAR},
+			subject_type = #{subjectType,jdbcType=VARCHAR},
+			create_time = #{createTime,jdbcType=TIMESTAMP},
+			update_time = #{updateTime,jdbcType=TIMESTAMP},
+			gps_x = #{gpsX,jdbcType=VARCHAR},
+			gps_y = #{gpsY,jdbcType=VARCHAR},
+			gps_addr = #{gpsAddr,jdbcType=VARCHAR}
+		where com_id = #{comId,jdbcType=VARCHAR}
+	</update>
+</mapper>

@@ -12,7 +12,7 @@ import com.n22.cs.comp.common.DispatcherUtils;
 
 /**
  * @desc 用来转发请求到页面
- * @author jackphang
+ * @author xxx
  * @date 2016年11月23日 下午7:34:12
  */
 public class BaseDispatcherController {
@@ -29,7 +29,7 @@ public class BaseDispatcherController {
 	 * 
 	 * @desc: restful 请求风格,多个参数传递格式为 rest/detail/123-fdasf-3434.htm
 	 * @remake : model中保存数据的key为param1,param2等
-	 * @auth:jackphang
+	 * @auth:xxx
 	 * @date:2016年10月28日 上午11:29:53
 	 * @param param
 	 * @return

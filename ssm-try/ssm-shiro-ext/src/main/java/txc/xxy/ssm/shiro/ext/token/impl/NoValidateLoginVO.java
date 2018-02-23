@@ -11,6 +11,7 @@ import com.n22.cs.comp.shiro.exceprion.SysManageException;
 
 import txc.xxy.ssm.shiro.ext.model.bo.LoginResultBO;
 import txc.xxy.ssm.shiro.ext.token.CustParentToken;
+import txc.xyz.base.model.BaseUser;
 
 /**
   * 无需验证的登录---通过手机号
@@ -37,10 +38,10 @@ public class NoValidateLoginVO extends CustParentToken{
 		this.mobile = mobile;
 	}
 	
-	public LoginResultBO doLogin() throws SysManageException {
-		LoginResultBO loginResultBO  = new LoginResultBO();
+	public BaseUser doLogin() throws SysManageException {
+		BaseUser user  = new BaseUser();
 		//TODO--具体登录验证处理
-		return loginResultBO;
+		return user;
 	}
 
 	@Override

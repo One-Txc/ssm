@@ -5,7 +5,7 @@ import com.n22.cs.comp.common.ApplicationContextUtil;
 /**
  * 用于直接调用redis的方法，无需通过spring注入
  * 
- * @author jackphang
+ * @author xxx
  * @date 2016年6月11日 下午3:40:39
  * @version 1.0
  */

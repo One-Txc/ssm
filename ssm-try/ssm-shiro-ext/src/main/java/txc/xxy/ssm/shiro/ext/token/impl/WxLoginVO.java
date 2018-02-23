@@ -4,10 +4,11 @@ import com.n22.cs.comp.shiro.exceprion.SysManageException;
 
 import txc.xxy.ssm.shiro.ext.model.bo.LoginResultBO;
 import txc.xxy.ssm.shiro.ext.token.CustParentToken;
+import txc.xyz.base.model.BaseUser;
 
 /**
  * @desc 微信一键登录需要的业务对象
- * @author jackphang
+ * @author xxx
  * @date 2017年2月7日 上午10:46:34
  */
 public class WxLoginVO  extends CustParentToken{
@@ -39,11 +40,11 @@ public class WxLoginVO  extends CustParentToken{
 	public void setOpenid(String openid) {
 		this.openid = openid;
 	}
-	
-	public LoginResultBO doLogin() throws SysManageException {
-		LoginResultBO loginResultBO  = new LoginResultBO();
+
+	public BaseUser doLogin() throws SysManageException {
+		BaseUser user  = new BaseUser();
 		//TODO--具体登录验证处理
-		return loginResultBO;
+		return user;
 	}
 
 	@Override
