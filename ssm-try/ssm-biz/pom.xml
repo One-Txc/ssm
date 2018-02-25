@@ -20,11 +20,11 @@
 		</dependency>
 		<dependency>
 			<groupId>txc.xxy</groupId>
-			<artifactId>ssm-mapper-ext</artifactId>
+			<artifactId>ssm-mapper</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>txc.xxy</groupId>
-			<artifactId>ssm-model-ext</artifactId>
+			<artifactId>ssm-model</artifactId>
 		</dependency>
 	</dependencies>
 </project>

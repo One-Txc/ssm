@@ -26,7 +26,7 @@
 		</dependency>
 		<dependency>
 			<groupId>txc.xxy</groupId>
-			<artifactId>ssm-mapper-ext</artifactId>
+			<artifactId>ssm-mapper</artifactId>
 		</dependency>
 		
 		<dependency>
@@ -142,6 +142,11 @@
 		<dependency>
 			<groupId>org.crazycake</groupId>
 			<artifactId>shiro-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.binarywang</groupId>
+			<artifactId>weixin-java-mp</artifactId>
 		</dependency>
 
 	</dependencies>

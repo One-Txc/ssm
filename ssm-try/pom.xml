@@ -43,7 +43,9 @@
 		<velocity-tools.version>2.0</velocity-tools.version>
 		<spring-boot.version>1.4.3.RELEASE</spring-boot.version>
 		<hibernate-validator.version>4.3.2.Final</hibernate-validator.version>
+		<weixin.java.version>2.9.0</weixin.java.version>
 	</properties>
+
 
 
 	<dependencyManagement>
@@ -89,16 +91,6 @@
 			<dependency>
 				<groupId>txc.xxy</groupId>
 				<artifactId>ssm-mapper</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>txc.xxy</groupId>
-				<artifactId>ssm-mapper-ext</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>txc.xxy</groupId>
-				<artifactId>ssm-model-ext</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -304,6 +296,13 @@
 						<artifactId>jedis</artifactId>
 					</exclusion>
 				</exclusions>
+			</dependency>
+
+
+			<dependency>
+				<groupId>com.github.binarywang</groupId>
+				<artifactId>weixin-java-mp</artifactId>
+				<version>${weixin.java.version}</version>
 			</dependency>
 
 		</dependencies>

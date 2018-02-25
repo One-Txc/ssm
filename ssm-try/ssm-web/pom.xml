@@ -14,5 +14,6 @@
 			<groupId>txc.xxy</groupId>
 			<artifactId>ssm-biz</artifactId>
 		</dependency>
+
 	</dependencies>
 </project>

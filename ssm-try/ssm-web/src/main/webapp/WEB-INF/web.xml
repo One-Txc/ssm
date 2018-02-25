@@ -18,11 +18,12 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-	      classpath*:spring/spring-ssm-*.xml,
-	      classpath*:spring/spring-tx.xml,
-	      classpath*:spring/spring-authc.xml,
-		  classpath*:spring/spring-authc-ssm.xml,
-	      classpath*:spring/comp-*.xml
+			classpath*:spring/spring-wx-*.xml,
+			classpath*:spring/spring-ssm-*.xml,
+			classpath*:spring/spring-tx.xml,
+			classpath*:spring/spring-authc.xml,
+			classpath*:spring/spring-authc-ssm.xml,
+			classpath*:spring/comp-*.xml
 	    </param-value>
 	</context-param>
 	<listener>

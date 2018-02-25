@@ -27,12 +27,21 @@
 			<value>
 				<!-- 系统会优先使用先匹配到的权限 -->
 
+				<!--登录部分免去权限-->
+				/r/login.htm = anon
+				/login.ajax = anon
+				/m/wx/** = anon
+
+
+
 				/r/html/student.htm = roleTypes[student,admin]
 				/r/html/teacher.htm = roleTypes[teacher,admin]
 				/r/html/admin.htm = roleTypes[admin]
 				/r/html/all.htm = roles[login]
 				/r/html/** = roles[login]
-				/** = anon
+
+				<!--未配置的默认为登录权限-->
+				/** = roles[login]
 			</value>
 		</property>
 	</bean>

@@ -136,7 +136,10 @@ public class UserRealm extends AuthorizingRealm {
 
 		// 当前 Realm 的 name
 		String realmName = getName();
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(loginToken.getUsername(), loginToken.getUsername(),
+
+		BaseUser user = loginToken.getLoginResultBO().getBaseUser();
+
+		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUserAccount(), user.getUserAccount(),
 				realmName);
 		setInitFlag(true);
 

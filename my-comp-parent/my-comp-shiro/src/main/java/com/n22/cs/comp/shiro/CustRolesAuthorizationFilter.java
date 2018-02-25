@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.n22.cs.comp.common.MobileBrowerUtil;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.filter.authz.RolesAuthorizationFilter;
@@ -83,7 +84,18 @@ public class CustRolesAuthorizationFilter extends RolesAuthorizationFilter {
 				out.flush();
 				out.close();
 			} else {
-				saveRequestAndRedirectToLogin(request, response);
+				//重定向到不同的登录接口
+				// 手机端访问
+				if (MobileBrowerUtil.isMobile(req)) {
+					WebUtils.issueRedirect(request, response, "/m/wx/snsapi_base/login.htm");
+					//WebUtils.issueRedirect(request, response, "/m/wx/snsapi_userinfo/login.htm");
+				}else {
+					//saveRequestAndRedirectToLogin(request, response);
+					WebUtils.issueRedirect(request, response, "/r/login.htm");
+				}
+
+
+
 			}
 		} else {
 			String url = req.getRequestURI().replaceAll(req.getContextPath(), "");

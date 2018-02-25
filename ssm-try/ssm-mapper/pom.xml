@@ -11,7 +11,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>txc.xxy</groupId>
-			<artifactId>ssm-model-ext</artifactId>
+			<artifactId>ssm-model</artifactId>
 		</dependency>
 		<!-- mybatis依赖 -->
 		<dependency>

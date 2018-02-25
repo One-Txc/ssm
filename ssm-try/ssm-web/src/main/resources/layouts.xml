@@ -11,29 +11,29 @@
 
 	<!-- 默认布局 -->
 	<layout page="layout/defaultLayout.vm" defalut="true" />
-
-	<!-- 手机端默认布局 -->
+<!--
+	&lt;!&ndash; 手机端默认布局 &ndash;&gt;
 	<layout page="layout/m/blankLayout.vm">
 		<pattner>/**/m/**</pattner>
 	</layout>
 
-	<!-- 首页布局请看 com.n22.cs.card.erp.common.CustVelocityView.doRender -->
+	&lt;!&ndash; 首页布局请看 com.n22.cs.card.erp.common.CustVelocityView.doRender &ndash;&gt;
 	<layout page="layout/emptyLayout.vm">
 		<pattner>/**/demand/gantt.htm</pattner>
-		<!-- <pattner>/**/demand/demandManage-add.htm</pattner> -->
+		&lt;!&ndash; <pattner>/**/demand/demandManage-add.htm</pattner> &ndash;&gt;
 	</layout>
 
-	<!-- 弹窗布局 -->
+	&lt;!&ndash; 弹窗布局 &ndash;&gt;
 	<layout page="layout/windowLayout.vm">
 		<pattner>/**/bug/add.htm</pattner>
 		<pattner>/**/bug/test.htm</pattner>
 		<pattner>/**/task/finishMsg.htm</pattner>
 	</layout>
 
-	<!-- 微信布局 -->
+	&lt;!&ndash; 微信布局 &ndash;&gt;
 	<layout page="layout/wxLayout.vm">
 		<pattner>/**/wx/**</pattner>
 	</layout>
-	
+	-->
 	
 </layouts>

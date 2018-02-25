@@ -1,9 +1,12 @@
-package txc.xxy.ssm.web.controller;
+package txc.xxy.ssm.web.controller.login;
 
 import java.util.Map;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.n22.cs.comp.common.MobileBrowerUtil;
+import com.n22.cs.comp.common.enums.EnvEnum;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.n22.cs.comp.common.IPUtil;
 
+import txc.xxy.ssm.shiro.ext.SessionUtil;
 import txc.xxy.ssm.shiro.ext.token.impl.LoginVO;
 
 /**

@@ -1,29 +1,20 @@
 package txc.xxy.ssm.shiro.ext.token.impl;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
+import com.n22.cs.comp.common.ApplicationContextUtil;
 import com.n22.cs.comp.common.Coder;
+import com.n22.cs.comp.shiro.exceprion.SysManageException;
+import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
-import org.joda.time.DateTime;
-
-import com.n22.cs.comp.common.ApplicationContextUtil;
-import com.n22.cs.comp.shiro.exceprion.SysManageException;
-
-import txc.xyz.base.mapper.BaseRoleMapper;
-import txc.xyz.base.mapper.BaseUserMapper;
-import txc.xyz.base.mapper.BaseUserRoleRelaMapper;
-import txc.xyz.base.model.BaseRole;
-import txc.xyz.base.model.BaseUser;
-import txc.xyz.base.model.BaseUserExample;
-import txc.xyz.base.model.BaseUserRoleRela;
-import txc.xyz.base.model.BaseUserRoleRelaExample;
-import txc.xxy.ssm.shiro.ext.common.enums.StatusEnum;
 import txc.xxy.ssm.shiro.ext.model.bo.LoginResultBO;
 import txc.xxy.ssm.shiro.ext.token.CustParentToken;
+import txc.xyz.base.mapper.BaseUserMapper;
+import txc.xyz.base.model.BaseUser;
+import txc.xyz.base.model.BaseUserExample;
+
+import java.util.List;
 
 /**
  * @desc (用户名-密码)登录
@@ -37,25 +28,23 @@ public class LoginVO extends CustParentToken{
 	private String userType; // 用户类型
 	private String loginIp;// 登录时的ip
 	private String openid;
-	
-	
+
 	// 依赖对象
 	private BaseUserMapper baseUserMapper;
-//	private BaseRoleMapper baseRoleMapper;
-//	private BaseUserRoleRelaMapper baseUserRoleRelaMapper;
-	
-	
+	private WxMpService wxMpService;
 	
 	public LoginVO() {
 		super();
 		//初始化依赖对象
 		baseUserMapper = ApplicationContextUtil.getBean(BaseUserMapper.class);
-//		baseRoleMapper = ApplicationContextUtil.getBean(BaseRoleMapper.class);
-//		baseUserRoleRelaMapper = ApplicationContextUtil.getBean(BaseUserRoleRelaMapper.class);
+		wxMpService = ApplicationContextUtil.getBean(WxMpService.class);
 	}
 
 	public LoginVO(String username, String password, String userType, String loginIp) {
 		super(username,password);
+		//初始化依赖对象
+		baseUserMapper = ApplicationContextUtil.getBean(BaseUserMapper.class);
+		wxMpService = ApplicationContextUtil.getBean(WxMpService.class);
 		this.userType = userType;
 		this.loginIp = loginIp;
 	}
@@ -123,6 +112,16 @@ public class LoginVO extends CustParentToken{
 		}
 		if(StringUtils.isNotBlank(getOpenid())){
 			user.setOpenId(getOpenid());
+			//关联微信头像
+			if(StringUtils.isBlank(user.getIconImgUrl())){
+				try {
+					WxMpUser wxMpUser = wxMpService.getUserService().userInfo(getOpenid());
+					user.setIconImgUrl(wxMpUser.getHeadImgUrl());
+				} catch (WxErrorException e) {
+					//处理异常，即使报错以不影响正常流程
+					e.printStackTrace();
+				}
+			}
 		}
 
 		//loginResultBO.setBaseUser(user);
