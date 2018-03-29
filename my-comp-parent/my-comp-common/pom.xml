@@ -6,8 +6,14 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>my-comp-common</artifactId>
-  
-  <dependencies>
+
+
+
+
+
+
+
+	<dependencies>
 		<!-- 时间操作组件 -->
 		<dependency>
 			<groupId>joda-time</groupId>
@@ -118,4 +124,20 @@
 		</dependency>
 
 	</dependencies>
+
+
+	<distributionManagement>
+		<repository>
+			<!-- 这里的ID要和setting的id一致 -->
+			<id>releases</id>
+			<url>http://111.230.142.95:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<!--这是打成快照版本的配置，如果不用这个snapshotRepository标签，打包失败，会报权限问题 -->
+		<snapshotRepository>
+			<id>releases</id>
+			<url>http://111.230.142.95:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+
 </project>
